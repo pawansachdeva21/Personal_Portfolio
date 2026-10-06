@@ -5,7 +5,7 @@ import { GITHUB_URL, LINKEDIN_URL, RESUME_URL } from "@/app/lib/constants";
 const stats = [
   { value: "5+", label: "Years of experience" },
   { value: "2M+", label: "Users on platforms I've built" },
-  { value: "10+", label: "Projects shipped" },
+  { value: "15+", label: "Projects shipped" },
   { value: "25+", label: "Technologies" },
 ];
 
