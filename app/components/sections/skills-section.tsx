@@ -125,7 +125,7 @@ export function SkillsSection() {
         </div>
       </div>
 
-      <div className="w-full space-y-5">
+      <div className="w-full grid gap-x-10 gap-y-5 lg:grid-cols-2">
         {skillCategories.map((category) => (
           <div key={category.name} className="space-y-3">
             <h4 className="text-lg font-medium text-[#08090a] dark:text-white flex items-center gap-2">

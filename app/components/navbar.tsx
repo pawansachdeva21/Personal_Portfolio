@@ -70,7 +70,7 @@ export function Navbar({ sections = NAV_SECTIONS }: NavbarProps) {
       <nav
         ref={navRef}
         className={cn(
-          "fixed top-3 sm:top-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between w-[95%] max-w-[670px] py-2 px-4 rounded-sm transition-all duration-300 overflow-hidden",
+          "fixed top-3 sm:top-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between w-[95%] max-w-[670px] lg:max-w-[68rem] py-2 px-4 rounded-sm transition-all duration-300 overflow-hidden",
           scrolled
             ? "bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border border-gray-200/50 dark:border-gray-800/50 shadow-lg"
             : "bg-white/60 dark:bg-[#0a0a0a]/60 backdrop-blur-sm border border-gray-200/60 dark:border-gray-800/30"

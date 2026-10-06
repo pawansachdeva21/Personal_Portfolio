@@ -76,7 +76,7 @@ export function ServicesSection() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-full">
         {services.map((service, index) => (
           <SpotlightCard
             key={index}
@@ -86,7 +86,7 @@ export function ServicesSection() {
             glowEffect={true}
             glowSize={150}
             glowOpacity={0.15}
-            className="p-6 rounded-sm border border-gray-200/80 dark:border-gray-800/50 bg-white dark:bg-[#0a0a0a] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300"
+            className="lg:last:odd:col-span-2 p-6 rounded-sm border border-gray-200/80 dark:border-gray-800/50 bg-white dark:bg-[#0a0a0a] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300"
           >
             <div className="flex flex-col xs:flex-row items-start gap-4">
               <div className="flex-shrink-0 mt-1">{service.icon}</div>

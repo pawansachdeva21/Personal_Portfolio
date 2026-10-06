@@ -53,7 +53,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
         )}
 
-        <div className="w-full sm:w-[60%] flex flex-col p-5 space-y-3">
+        <div className="w-full sm:flex-1 sm:min-w-0 flex flex-col p-5 space-y-3">
           <h3 className="text-xl font-semibold text-[#737373] dark:text-white group-hover:text-[#08090a]/90 dark:group-hover:text-emerald-500/90 duration-300 ease-in-out transition-colors">
             {project.title}
           </h3>
