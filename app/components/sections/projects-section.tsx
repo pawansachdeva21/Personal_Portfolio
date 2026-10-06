@@ -1,19 +1,6 @@
-import { ProjectCard } from "@/app/components/project-card";
+import { ProjectCard, type Project } from "@/app/components/project-card";
 import HeadingBadge from "@/app/components/heading-badge";
 import { FolderGit2 } from "lucide-react";
-
-type Project = {
-  id: string;
-  title: string;
-  description: string;
-  imageUrl?: string;
-  videoUrl?: string;
-  tags: string[];
-  link?: string;
-  githubLink?: string;
-  npmLink?: string;
-  year?: string;
-};
 
 const projects: Project[] = [
   {
@@ -23,7 +10,7 @@ const projects: Project[] = [
       "Released a React hook for AI-powered clipboard management, using Google Gemini for smart text insights. Track history, add tags and categories, published on NPM.",
     imageUrl: "/projects/npmm.png",
     tags: ["TypeScript", "React", "Google Gemini AI", "NPM Package"],
-    link: "https://www.npmjs.com/package/use-history-ai", // Your Vercel demo
+    link: "https://www.npmjs.com/package/use-history-ai",
     npmLink: "https://www.npmjs.com/package/use-history-ai",
     githubLink: "https://github.com/pawansachdeva21/use-history-ai",
     year: "2025",
@@ -43,8 +30,8 @@ const projects: Project[] = [
     title: "Figma Clone",
     description:
       "Developed a real-time collaborative design tool with live canvas drawing and multi-user sync, powered by Liveblocks.",
-    imageUrl: "",
     videoUrl: "/projects/figma.mp4",
+    posterUrl: "/projects/figma-poster.jpg",
     tags: ["Next.js", "ShadCN", "Liveblocks", "Tailwind CSS"],
     link: "https://figma-clone-git-main-pawan-kumar-sachdevas-projects.vercel.app/",
     year: "2024",
@@ -54,8 +41,8 @@ const projects: Project[] = [
     title: "RapidChat",
     description:
       "Built a full-stack real-time chat app using MERN and Socket.IO with authentication and live messaging.",
-    imageUrl: "",
     videoUrl: "/projects/chat.mp4",
+    posterUrl: "/projects/chat-poster.jpg",
     tags: ["React", "Node.js", "Socket.IO", "MongoDB"],
     link: "https://rapid-chat-q01f.onrender.com/",
     year: "2023",

@@ -2,15 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { CalendarRangeIcon } from "lucide-react";
 import { SpotlightCard } from "@/app/components/ui/spotlight-card";
+import { LazyVideo } from "@/app/components/ui/lazy-video";
 
-type Project = {
+export type Project = {
   id: string;
   title: string;
   description: string;
   imageUrl?: string;
   videoUrl?: string;
+  posterUrl?: string;
   tags: string[];
   link?: string;
+  githubLink?: string;
+  npmLink?: string;
   year?: string;
 };
 
@@ -29,23 +33,20 @@ export function ProjectCard({ project }: ProjectCardProps) {
     >
       <div className="flex sm:flex-row flex-col w-full ">
         {(project.imageUrl || project.videoUrl) && (
-        <div className="hidden md:block md:w-60 overflow-hidden border border-black">
+        <div className="relative hidden md:block md:w-60 overflow-hidden border border-black">
           {project.imageUrl && (
             <Image
               src={project.imageUrl}
               alt={project.title}
               fill
-              className="object-cover p-1 rounded-sm max-w-60"
+              sizes="240px"
+              className="object-cover p-1 rounded-sm"
             />
           )}
           {project.videoUrl && (
-            <video
+            <LazyVideo
               src={project.videoUrl}
-              autoPlay
-              muted
-              loop
-              preload="metadata"
-              playsInline
+              poster={project.posterUrl}
               className="absolute top-5 left-5 w-48 h-40 object-cover p-1 rounded-sm"
             />
           )}
