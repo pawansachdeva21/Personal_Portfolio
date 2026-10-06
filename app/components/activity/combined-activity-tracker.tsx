@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   Activity,
   ExternalLink,
@@ -10,284 +10,141 @@ import {
   X,
 } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
-// import { SiLeetcode } from "react-icons/si";
+import { GITHUB_URL } from "@/app/lib/constants";
 
-interface Activity {
+interface Day {
+  key: string;
   date: Date;
-  github: number;
-  // leetcode: number;
-  total: number;
+  count: number;
   level: number;
 }
 
-interface CombinedActivityTrackerProps {
-  githubUsername?: string;
-  // leetcodeUsername?: string;
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+const CONTRIBUTION_COLORS: Record<number, string> = {
+  0: "bg-gray-200 dark:bg-gray-800",
+  1: "bg-[#9be9a8] dark:bg-[#0e4429]",
+  2: "bg-[#40c463] dark:bg-[#006d32]",
+  3: "bg-[#30a14e] dark:bg-[#26a641]",
+  4: "bg-[#216e39] dark:bg-[#39d353]",
+};
+
+const getContributionColor = (level: number) =>
+  CONTRIBUTION_COLORS[level] || CONTRIBUTION_COLORS[0];
+
+const pad = (n: number) => String(n).padStart(2, "0");
+
+// YYYY-MM-DD in local time
+const toKey = (date: Date) =>
+  `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+
+// Parse YYYY-MM-DD as a local date (new Date("YYYY-MM-DD") would be UTC)
+const fromKey = (key: string) => {
+  const [y, m, d] = key.split("-").map(Number);
+  return new Date(y, m - 1, d);
+};
+
+function calculateStreaks(days: Day[]) {
+  let longest = 0;
+  let run = 0;
+  for (const day of days) {
+    run = day.count > 0 ? run + 1 : 0;
+    longest = Math.max(longest, run);
+  }
+
+  const countByKey = new Map(days.map((d) => [d.key, d.count]));
+  const cursor = new Date();
+  // A streak is still alive if today has no contributions yet
+  if (!countByKey.get(toKey(cursor))) cursor.setDate(cursor.getDate() - 1);
+
+  let current = 0;
+  while ((countByKey.get(toKey(cursor)) ?? 0) > 0) {
+    current++;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+
+  return { current, longest };
 }
 
-export function CombinedActivityTracker({
-  githubUsername = "pawansachdeva21",
-}: // leetcodeUsername = "pawansachdeva1998",
-CombinedActivityTrackerProps) {
-  const initialYear = new Date().getFullYear() - 1;
-  const [activities, setActivities] = useState<Activity[]>([]);
-  const [totalContributions, setTotalContributions] = useState(0);
-  const [selectedYear, setSelectedYear] = useState(initialYear);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [streaks, setStreaks] = useState({ current: 0, longest: 0 });
-  const [selectedDay, setSelectedDay] = useState<Activity | null>(null);
-  const [showModal, setShowModal] = useState(false);
+// Columns of 7 slots (Sun..Sat); slots outside the year stay empty
+function groupByWeek(days: Day[]) {
+  const weeks: (Day | undefined)[][] = [];
+  let week: (Day | undefined)[] = new Array(7).fill(undefined);
 
+  days.forEach((day, index) => {
+    const weekday = day.date.getDay();
+    week[weekday] = day;
+    if (weekday === 6 || index === days.length - 1) {
+      weeks.push(week);
+      week = new Array(7).fill(undefined);
+    }
+  });
+
+  return weeks;
+}
+
+export function CombinedActivityTracker() {
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 7 }, (_, i) => currentYear - i);
 
-  const calculateStreaks = useCallback((activities: Activity[]) => {
-    if (activities.length === 0) return { current: 0, longest: 0 };
-
-    // Helper: format date in local timezone as YYYY-MM-DD
-    const formatLocalDate = (date: Date) => {
-      return date.toLocaleDateString("en-CA");
-    };
-
-    // Normalize all dates to local time
-    const allDates: Activity[] = [];
-    const firstDate = new Date(activities[0].date);
-    const lastDate = new Date(activities[activities.length - 1].date);
-
-    for (
-      let d = new Date(firstDate);
-      d <= lastDate;
-      d.setDate(d.getDate() + 1)
-    ) {
-      const dateStr = formatLocalDate(d);
-      const existing = activities.find(
-        (a) => formatLocalDate(a.date) === dateStr
-      );
-      allDates.push(
-        existing || {
-          date: new Date(d),
-          github: 0,
-          total: 0,
-          level: 0,
-        }
-      );
-    }
-
-    // Calculate longest streak
-    let longest = 0;
-    let temp = 0;
-    for (const a of allDates) {
-      if (a.total > 0) {
-        temp++;
-        longest = Math.max(longest, temp);
-      } else {
-        temp = 0;
-      }
-    }
-
-    // Calculate current streak based on local system time
-    const today = new Date();
-    const todayStr = formatLocalDate(today);
-
-    // Check if last activity was today or earlier
-    // const lastActivityStr = formatLocalDate(allDates[allDates.length - 1].date);
-    const todayActivity =
-      allDates.find((a) => formatLocalDate(a.date) === todayStr) || null;
-
-    // If today's data exists and has contributions, start from today, else from yesterday
-    const startFromToday = todayActivity && todayActivity.total > 0;
-    const checkDate = new Date(today);
-    if (!startFromToday) checkDate.setDate(checkDate.getDate() - 1);
-
-    let current = 0;
-
-    // Walk backward in time locally
-    for (let i = allDates.length - 1; i >= 0; i--) {
-      const activityDateStr = formatLocalDate(allDates[i].date);
-      const checkDateStr = formatLocalDate(checkDate);
-
-      if (activityDateStr === checkDateStr) {
-        if (allDates[i].total > 0) {
-          current++;
-          checkDate.setDate(checkDate.getDate() - 1); // go to previous local day
-        } else {
-          break; // streak ended
-        }
-      } else if (activityDateStr < checkDateStr) {
-        break; // gap day
-      }
-    }
-
-    return { current, longest };
-  }, []);
-
-  const fetchCombinedActivities = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-
-      // Fetch GitHub contributions
-      const githubResponse = await fetch(
-        `https://github-contributions-api.jogruber.de/v4/${githubUsername}?y=${selectedYear}`
-      );
-
-      if (!githubResponse.ok) {
-        throw new Error("Failed to fetch GitHub data");
-      }
-
-      const githubData = await githubResponse.json();
-
-      const activityMap = new Map<string, Activity>();
-
-      // Initialize with GitHub data
-      githubData.contributions.forEach(
-        (contribution: { date: string; count: number; level: number }) => {
-          const dateStr = contribution.date;
-          activityMap.set(dateStr, {
-            date: new Date(contribution.date),
-            github: contribution.count,
-            // leetcode: 0,
-            total: contribution.count,
-            level: contribution.level,
-          });
-        }
-      );
-
-      // Fetch LeetCode submission calendar using official GraphQL API
-      //   try {
-      //     const leetcodeGraphQLResponse = await fetch("/api/leetcode", {
-      //       method: "POST",
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //       },
-      //       body: JSON.stringify({
-      //         query: `
-      //   query userProfileCalendar($username: String!, $year: Int) {
-      //     matchedUser(username: $username) {
-      //       userCalendar(year: $year) {
-      //         submissionCalendar
-      //       }
-      //     }
-      //   }
-      // `,
-      //         variables: {
-      //           username: leetcodeUsername,
-      //           year: selectedYear,
-      //         },
-      //       }),
-      //     });
-
-      //     if (leetcodeGraphQLResponse.ok) {
-      //       const leetcodeData = await leetcodeGraphQLResponse.json();
-      //       console.log("LeetCode GraphQL Response:", leetcodeData);
-
-      //       if (
-      //         leetcodeData.data?.matchedUser?.userCalendar?.submissionCalendar
-      //       ) {
-      //         let calendar =
-      //           leetcodeData.data.matchedUser.userCalendar.submissionCalendar;
-
-      //         // Parse the stringified calendar
-      //         if (typeof calendar === "string") {
-      //           calendar = JSON.parse(calendar);
-      //         }
-
-      //         console.log("LeetCode Calendar:", calendar);
-
-      //         // Process all LeetCode submissions for selected year
-      //         Object.entries(calendar).forEach(([timestamp, count]) => {
-      //           const date = new Date(parseInt(timestamp) * 1000);
-      //           const dateStr = date.toISOString().split("T")[0];
-
-      //           const existing = activityMap.get(dateStr);
-      //           const leetcodeCount = Number(count) || 0;
-
-      //           if (existing) {
-      //             const newTotal = existing.github + leetcodeCount;
-      //             activityMap.set(dateStr, {
-      //               ...existing,
-      //               leetcode: leetcodeCount,
-      //               total: newTotal,
-      //               level: Math.max(
-      //                 existing.level,
-      //                 Math.min(4, Math.ceil(newTotal / 2))
-      //               ),
-      //             });
-      //           } else {
-      //             // Create entry for LeetCode-only days
-      //             activityMap.set(dateStr, {
-      //               date: date,
-      //               github: 0,
-      //               leetcode: leetcodeCount,
-      //               total: leetcodeCount,
-      //               level: Math.min(4, Math.ceil(leetcodeCount / 2)),
-      //             });
-      //           }
-      //         });
-      //       }
-      //     } else {
-      //       console.error("LeetCode GraphQL API failed");
-      //     }
-      //   } catch (leetcodeErr) {
-      //     console.error("LeetCode GraphQL fetch error:", leetcodeErr);
-      //   }
-
-      const activitiesArray = Array.from(activityMap.values()).sort(
-        (a, b) => a.date.getTime() - b.date.getTime()
-      );
-      const total = activitiesArray.reduce((sum, act) => sum + act.total, 0);
-
-      setActivities(activitiesArray);
-      setTotalContributions(total);
-
-      const calculatedStreaks = calculateStreaks(activitiesArray);
-      setStreaks(calculatedStreaks);
-    } catch (err) {
-      console.error("Error fetching activities:", err);
-      setError(err instanceof Error ? err.message : "Unknown error");
-    } finally {
-      setIsLoading(false);
-    }
-  }, [githubUsername, selectedYear, calculateStreaks]);
+  const [days, setDays] = useState<Day[]>([]);
+  const [selectedYear, setSelectedYear] = useState(currentYear - 1);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedDay, setSelectedDay] = useState<Day | null>(null);
 
   useEffect(() => {
-    fetchCombinedActivities();
-  }, [fetchCombinedActivities]);
+    const controller = new AbortController();
+    setIsLoading(true);
+    setError(null);
 
-  const getContributionColor = (level: number) => {
-    const colors: Record<number, string> = {
-      0: "bg-gray-200 dark:bg-gray-800",
-      1: "bg-[#9be9a8] dark:bg-[#0e4429]",
-      2: "bg-[#40c463] dark:bg-[#006d32]",
-      3: "bg-[#30a14e] dark:bg-[#26a641]",
-      4: "bg-[#216e39] dark:bg-[#39d353]",
-    };
-    return colors[level] || colors[0];
-  };
+    fetch(`/api/github/contributions?year=${selectedYear}`, {
+      signal: controller.signal,
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch GitHub data");
+        return res.json();
+      })
+      .then((data: { date: string; count: number; level: number }[]) => {
+        setDays(
+          data.map((c) => ({
+            key: c.date,
+            date: fromKey(c.date),
+            count: c.count,
+            level: c.level,
+          }))
+        );
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        if (controller.signal.aborted) return;
+        setError(err instanceof Error ? err.message : "Unknown error");
+        setIsLoading(false);
+      });
 
-  const groupActivitiesByWeek = () => {
-    const weeks: Activity[][] = [];
-    let currentWeek: Activity[] = [];
+    return () => controller.abort();
+  }, [selectedYear]);
 
-    activities.forEach((activity, index) => {
-      currentWeek.push(activity);
-
-      if (activity.date.getDay() === 6 || index === activities.length - 1) {
-        weeks.push([...currentWeek]);
-        currentWeek = [];
-      }
-    });
-
-    return weeks;
-  };
-
-  const handleDayClick = (activity: Activity | undefined) => {
-    if (activity && activity.total > 0) {
-      setSelectedDay(activity);
-      setShowModal(true);
-    }
-  };
+  const totalContributions = useMemo(
+    () => days.reduce((sum, day) => sum + day.count, 0),
+    [days]
+  );
+  const streaks = useMemo(() => calculateStreaks(days), [days]);
+  const weeks = useMemo(() => groupByWeek(days), [days]);
 
   if (isLoading) {
     return (
@@ -306,22 +163,6 @@ CombinedActivityTrackerProps) {
       </div>
     );
   }
-
-  const weeks = groupActivitiesByWeek();
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
 
   return (
     <div className="space-y-6">
@@ -354,25 +195,14 @@ CombinedActivityTrackerProps) {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <a
-            href={`https://github.com/${githubUsername}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 text-sm text-emerald-600 dark:text-emerald-400 hover:underline"
-          >
-            GitHub <ExternalLink size={14} />
-          </a>
-          {/* <span className="text-gray-400">|</span>
-          <a
-            href={`https://leetcode.com/${leetcodeUsername}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 text-sm text-emerald-600 dark:text-emerald-400 hover:underline"
-          >
-            LeetCode <ExternalLink size={14} />
-          </a> */}
-        </div>
+        <a
+          href={GITHUB_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1 text-sm text-emerald-600 dark:text-emerald-400 hover:underline"
+        >
+          GitHub <ExternalLink size={14} />
+        </a>
       </div>
 
       {/* Streak Stats */}
@@ -420,9 +250,9 @@ CombinedActivityTrackerProps) {
         <div className="inline-flex flex-col gap-1 p-4 bg-gray-50 dark:bg-gray-900/30 rounded-lg border border-gray-200 dark:border-gray-800 min-w-max">
           <div className="flex gap-1 mb-2">
             <div className="w-8"></div>
-            {months.map((month, idx) => (
+            {MONTHS.map((month) => (
               <div
-                key={idx}
+                key={month}
                 className="text-xs text-gray-500 dark:text-gray-400 w-full text-center px-4"
               >
                 {month}
@@ -432,7 +262,7 @@ CombinedActivityTrackerProps) {
 
           <div className="flex gap-1">
             <div className="flex flex-col gap-1 justify-around pr-2">
-              {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+              {WEEKDAYS.map((day) => (
                 <div
                   key={day}
                   className="text-xs text-gray-500 dark:text-gray-400 h-3 flex items-center"
@@ -445,31 +275,26 @@ CombinedActivityTrackerProps) {
             <div className="flex gap-1">
               {weeks.map((week, weekIdx) => (
                 <div key={weekIdx} className="flex flex-col gap-1">
-                  {Array.from({ length: 7 }).map((_, dayIdx) => {
-                    const activity = week.find(
-                      (a) => a.date.getDay() === dayIdx
-                    );
-                    return (
-                      <div
-                        key={dayIdx}
-                        onClick={() => handleDayClick(activity)}
-                        className={`w-3 h-3 rounded-xs  ${
-                          activity
-                            ? getContributionColor(activity.level)
-                            : "bg-transparent"
-                        } hover:ring-2 hover:ring-emerald-500 transition-all ${
-                          activity && activity.total > 0 ? "cursor-pointer" : ""
-                        }`}
-                        title={
-                          activity
-                            ? `${
-                                activity.total
-                              } contributions on ${activity.date.toDateString()}`
-                            : ""
-                        }
-                      />
-                    );
-                  })}
+                  {week.map((day, dayIdx) => (
+                    <div
+                      key={dayIdx}
+                      onClick={
+                        day && day.count > 0
+                          ? () => setSelectedDay(day)
+                          : undefined
+                      }
+                      className={`w-3 h-3 rounded-xs ${
+                        day ? getContributionColor(day.level) : "bg-transparent"
+                      } hover:ring-2 hover:ring-emerald-500 transition-all ${
+                        day && day.count > 0 ? "cursor-pointer" : ""
+                      }`}
+                      title={
+                        day
+                          ? `${day.count} contributions on ${day.date.toDateString()}`
+                          : ""
+                      }
+                    />
+                  ))}
                 </div>
               ))}
             </div>
@@ -490,10 +315,10 @@ CombinedActivityTrackerProps) {
         <span>More</span>
       </div>
 
-      {showModal && selectedDay && (
+      {selectedDay && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
-          onClick={() => setShowModal(false)}
+          onClick={() => setSelectedDay(null)}
         >
           <div
             className="bg-white dark:bg-gray-900 rounded-lg p-6 max-w-md w-full mx-4 border border-gray-200 dark:border-gray-800"
@@ -509,53 +334,25 @@ CombinedActivityTrackerProps) {
                 })}
               </h3>
               <button
-                onClick={() => setShowModal(false)}
+                onClick={() => setSelectedDay(null)}
                 className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                aria-label="Close"
               >
                 <X size={20} />
               </button>
             </div>
 
-            <div className="space-y-3">
-              <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
-                <div className="flex items-center gap-2">
-                  <FaGithub />
-                  <span className="text-sm font-medium text-gray-900 dark:text-white">
-                    Contributed on GitHub
-                  </span>
-                </div>
-                <span className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {selectedDay.github}{" "}
-                  {selectedDay.github === 1 ? "contribution" : "contributions"}
+            <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
+              <div className="flex items-center gap-2">
+                <FaGithub />
+                <span className="text-sm font-medium text-gray-900 dark:text-white">
+                  Contributed on GitHub
                 </span>
               </div>
-
-              {/* <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
-                <div className="flex items-center gap-2">
-                  <SiLeetcode
-                    size={18}
-                    className="text-gray-900 dark:text-emerald-500"
-                  />
-                  <span className="text-sm font-medium text-gray-900 dark:text-white">
-                    Practiced on LeetCode
-                  </span>
-                </div>
-                <span className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {selectedDay.leetcode}{" "}
-                  {selectedDay.leetcode === 1 ? "submission" : "submissions"}
-                </span>
-              </div> */}
-
-              {/* <div className="pt-3 border-t border-gray-200 dark:border-gray-700">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                    Total Activity
-                  </span>
-                  <span className="text-lg font-bold text-emerald-600 dark:text-emerald-400">
-                    {selectedDay.total}
-                  </span>
-                </div>
-              </div> */}
+              <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                {selectedDay.count}{" "}
+                {selectedDay.count === 1 ? "contribution" : "contributions"}
+              </span>
             </div>
           </div>
         </div>

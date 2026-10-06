@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Code2, Loader2 } from "lucide-react";
 
 interface Language {
@@ -9,89 +9,53 @@ interface Language {
   count: number;
 }
 
-interface GitHubLanguagesProps {
-  username?: string;
-}
+const LANGUAGE_COLORS: Record<string, string> = {
+  JavaScript: "bg-yellow-400",
+  TypeScript: "bg-blue-500",
+  Python: "bg-blue-600",
+  Java: "bg-red-500",
+  HTML: "bg-orange-500",
+  CSS: "bg-purple-500",
+  Go: "bg-cyan-500",
+  Rust: "bg-orange-600",
+  Ruby: "bg-red-600",
+  PHP: "bg-indigo-500",
+  C: "bg-gray-600",
+  "C++": "bg-pink-500",
+  "C#": "bg-green-600",
+  Swift: "bg-orange-400",
+  Kotlin: "bg-purple-600",
+  Dart: "bg-blue-400",
+};
 
-interface Repository {
-  language: string | null;
-}
+const getLanguageColor = (language: string) =>
+  LANGUAGE_COLORS[language] || "bg-gray-500";
 
-export function GitHubLanguages({ username = "pawansachdeva21" }: GitHubLanguagesProps) {
+export function GitHubLanguages() {
   const [languages, setLanguages] = useState<Language[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchGitHubLanguages = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-
-      const reposResponse = await fetch(
-        `https://api.github.com/users/${username}/repos?per_page=100`
-      );
-
-      if (!reposResponse.ok) {
-        throw new Error("Failed to fetch repositories");
-      }
-
-      const repos: Repository[] = await reposResponse.json();
-
-
-      const languageBytes: Record<string, number> = {};
-      for (const repo of repos) {
-        if (repo.language) {
-          languageBytes[repo.language] =
-            (languageBytes[repo.language] || 0) + 1;
-        }
-      }
-
-      const totalRepos = Object.values(languageBytes).reduce(
-        (sum, count) => sum + count,
-        0
-      );
-      const languageData = Object.entries(languageBytes)
-        .map(([name, count]) => ({
-          name,
-          percentage: ((count / totalRepos) * 100).toFixed(1),
-          count,
-        }))
-        .sort((a, b) => b.count - a.count)
-        .slice(0, 6);
-      setLanguages(languageData);
-    } catch (err) {
-      console.error("Error fetching languages:", err);
-      setError(err instanceof Error ? err.message : "Unknown error");
-    } finally {
-      setIsLoading(false);
-    }
-  }, [username]);
-
   useEffect(() => {
-    fetchGitHubLanguages();
-  }, [fetchGitHubLanguages]);
+    const controller = new AbortController();
 
-  const getLanguageColor = (language: string) => {
-    const colors: Record<string, string> = {
-      JavaScript: "bg-yellow-400",
-      TypeScript: "bg-blue-500",
-      Python: "bg-blue-600",
-      Java: "bg-red-500",
-      HTML: "bg-orange-500",
-      CSS: "bg-purple-500",
-      Go: "bg-cyan-500",
-      Rust: "bg-orange-600",
-      Ruby: "bg-red-600",
-      PHP: "bg-indigo-500",
-      C: "bg-gray-600",
-      "C++": "bg-pink-500",
-      "C#": "bg-green-600",
-      Swift: "bg-orange-400",
-      Kotlin: "bg-purple-600",
-      Dart: "bg-blue-400",
-    };
-    return colors[language] || "bg-gray-500";
-  };
+    fetch("/api/github/languages", { signal: controller.signal })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch repositories");
+        return res.json();
+      })
+      .then((data: Language[]) => {
+        setLanguages(data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        if (controller.signal.aborted) return;
+        setError(err instanceof Error ? err.message : "Unknown error");
+        setIsLoading(false);
+      });
+
+    return () => controller.abort();
+  }, []);
 
   if (isLoading) {
     return (
