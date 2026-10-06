@@ -1,15 +1,15 @@
 [
   {
     "title": "Introduction and Professional Summary",
-    "content": "Hi, I'm Pawan Kumar Sachdeva, a Senior Full Stack & AI Engineer with 5+ years of experience, based in Gurugram, India. I build full-stack apps and GenAI systems with React, Next.js, Python, FastAPI, LangChain, LangGraph and RAG. From AI chatbots and agent workflows to platforms serving millions of users, I love turning complex problems into products people actually use."
+    "content": "Hi, I'm Pawan Kumar Sachdeva, a Senior Full Stack & AI Engineer based in Gurugram, India. I've spent the last 5+ years building web apps with React and Next.js. These days I also write a lot of Python, FastAPI and LangChain, building AI chatbots and RAG systems that run in production."
   },
   {
     "title": "Detailed About Me - Who I Am",
-    "content": "I'm a developer who enjoys the whole journey of a product, from the first rough idea to the moment real people start using it. I'm just as happy polishing a small UI interaction as I am designing the backend and AI pieces that sit behind it. I care about simple, well-structured code and features that solve a real problem instead of just looking impressive in a demo. To me, good software should feel effortless to the people using it, even when there's a lot of complexity underneath."
+    "content": "I studied engineering in Ludhiana, started my career in Bengaluru, and now live and work in Gurugram. I like owning things end to end: the UI, the API and whatever sits in between. I'm not a fan of overengineering, so if something can be kept simple, I keep it simple."
   },
   {
     "title": "My Development Journey",
-    "content": "I got hooked on coding during college, mostly out of curiosity about how the apps I used every day actually worked. That curiosity turned into a career in 2021, and web development was my way in. React quickly became my favourite playground. Over time I went from building screens to owning features end to end. When Generative AI took off, I didn't want to just watch from the sidelines, so I dived in and learned by building: chatbots, agents, and side projects like this very assistant. Today, blending solid engineering with AI is what excites me most, and I'm still learning something new every week."
+    "content": "I wrote my first real programs during my B.Tech, mostly to figure out how the apps I used every day actually worked. After graduating in 2021 I started as a frontend developer, and React has been my go-to ever since. Over the years I moved more into backend and real-time work. When LLMs started getting good, I got curious and started building with them. That curiosity slowly turned into my day job, and now AI is a big part of what I work on."
   },
   {
     "title": "Education",
@@ -17,7 +17,7 @@
   },
   {
     "title": "Life Beyond Coding (Hobbies and Fitness)",
-    "content": "Outside of tech, I enjoy playing and watching cricket, following football, and playing chess, all of which keep me sharp and inspired. I'm also big on fitness and hit the gym regularly to stay energized and focused in both work and life."
+    "content": "When I'm away from my laptop, I'm usually watching or playing cricket, following football, or playing a game of chess. I also try to hit the gym regularly. It's the one hour of the day when I'm not thinking about code."
   },
   {
     "title": "Contact Information and Social Links",

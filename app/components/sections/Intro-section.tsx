@@ -14,21 +14,22 @@ export function IntroSection() {
             </span>{" "}
           </h1>
 
-          <p className="text-xl sm:text-2xl font-medium text-[#737373] dark:text-[#A1A1AA] max-w-2xl">
-            A Senior Full Stack &amp; AI Engineer building intelligent,
-            scalable products
+          <p className="text-xl sm:text-2xl font-medium text-[#737373] dark:text-[#A1A1AA] max-w-3xl">
+            Senior Full Stack &amp; AI Engineer, based in Gurugram
           </p>
 
-          <p className="text-sm sm:text-base font-normal text-[#737373] dark:text-[#A1A1AA] max-w-2xl">
-            With 5+ years of experience, I build full-stack apps and GenAI
-            systems with{" "}
+          <p className="text-sm sm:text-base font-normal text-[#737373] dark:text-[#A1A1AA] max-w-3xl">
+            I&apos;ve spent the last 5+ years building web apps with{" "}
             <span className="text-[#08090a] dark:text-emerald-500">
-              React, Next.js, Python, FastAPI, LangChain, LangGraph and RAG.
-            </span>{" "}
-            From AI chatbots and agent workflows to platforms serving millions
-            of users, I love turning complex problems into products people
-            actually use. Let&apos;s connect if you&apos;ve got a project that
-            could use my skills!
+              React and Next.js
+            </span>
+            . These days I also write a lot of{" "}
+            <span className="text-[#08090a] dark:text-emerald-500">
+              Python, FastAPI and LangChain
+            </span>
+            , building AI chatbots and RAG systems that run in production. If
+            you&apos;re working on something interesting, I&apos;d love to hear
+            about it.
           </p>
         </article>
       </div>

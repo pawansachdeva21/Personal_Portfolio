@@ -2,6 +2,30 @@ import HeadingBadge from "@/app/components/heading-badge";
 import { SpotlightCard } from "@/app/components/ui/spotlight-card";
 import { User } from "lucide-react";
 
+const story = [
+  {
+    title: "Who I Am",
+    paragraphs: [
+      "I'm Pawan. I studied engineering in Ludhiana, started my career in Bengaluru, and now live and work in Gurugram.",
+      "I like owning things end to end. Give me a problem and I'll happily work on the UI, the API and whatever sits in between. I'm not a fan of overengineering, so if something can be kept simple, I keep it simple.",
+    ],
+  },
+  {
+    title: "My Journey",
+    paragraphs: [
+      "I wrote my first real programs during my B.Tech, mostly to figure out how the apps I used every day actually worked. After graduating in 2021 I started as a frontend developer, and React has been my go-to ever since.",
+      "Over the years I moved more into backend and real-time work. When LLMs started getting good, I got curious and started building with them. That curiosity slowly turned into my day job, and now AI is a big part of what I work on.",
+    ],
+  },
+  {
+    title: "Beyond Coding",
+    paragraphs: [
+      "When I'm away from my laptop, I'm usually watching or playing cricket, following football, or playing a game of chess.",
+      "I also try to hit the gym regularly. It's the one hour of the day when I'm not thinking about code.",
+    ],
+  },
+];
+
 export function AboutSection() {
   return (
     <section
@@ -16,8 +40,7 @@ export function AboutSection() {
             <span className="text-[#08090a] dark:text-emerald-500">Story</span>
           </h3>
           <p className="text-[#737373] dark:text-[#A1A1AA] text-sm">
-            A little about who I am, how I got here, and what keeps me excited
-            about building software.
+            A bit about me outside the resume.
           </p>
         </div>
       </div>
@@ -29,59 +52,23 @@ export function AboutSection() {
         disableScale={true}
         className="p-6 rounded-sm border border-gray-200/80 dark:border-gray-800/50 bg-white dark:bg-[#0a0a0a] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300 w-full"
       >
-        <div className="space-y-6">
-          <div className="space-y-4">
-            <h4 className="text-lg font-medium text-[#08090a] dark:text-white flex items-center gap-2">
-              <span className="h-1 w-1 rounded-full bg-gray-900 dark:bg-emerald-500"></span>
-              Who I Am
-            </h4>
-            <p className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed">
-              I&apos;m a developer who enjoys the whole journey of a
-              product—from the first rough idea to the moment real people start
-              using it. I&apos;m just as happy polishing a small UI interaction
-              as I am designing the backend and AI pieces that sit behind it.
-            </p>
-            <p className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed">
-              I care about simple, well-structured code and features that solve
-              a real problem instead of just looking impressive in a demo. To
-              me, good software should feel effortless to the people using it,
-              even when there&apos;s a lot of complexity underneath.
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            <h4 className="text-lg font-medium text-[#08090a] dark:text-white flex items-center gap-2">
-              <span className="h-1 w-1 rounded-full bg-gray-900 dark:bg-emerald-500"></span>
-              My Journey
-            </h4>
-            <p className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed">
-              I got hooked on coding during college, mostly out of curiosity
-              about how the apps I used every day actually worked. That
-              curiosity turned into a career in 2021, and web development was my
-              way in—React quickly became my favourite playground.
-            </p>
-            <p className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed">
-              Over time I went from building screens to owning features end to
-              end. When Generative AI took off, I didn&apos;t want to just watch
-              from the sidelines, so I dived in and learned by building—
-              chatbots, agents, and side projects like the assistant on this very
-              site. Today, blending solid engineering with AI is what excites me
-              most, and I&apos;m still learning something new every week.
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            <h4 className="text-lg font-medium text-[#08090a] dark:text-white flex items-center gap-2">
-              <span className="h-1 w-1 rounded-full bg-gray-900 dark:bg-emerald-500"></span>
-              Beyond Coding
-            </h4>
-            <p className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed">
-              Outside of tech, I enjoy playing and watching cricket, following
-              football, and playing chess—all of which keep me sharp and
-              inspired. I&apos;m also big on fitness and hit the gym regularly
-              to stay energized and focused in both work and life.
-            </p>
-          </div>
+        <div className="grid gap-8 lg:grid-cols-3">
+          {story.map(({ title, paragraphs }) => (
+            <div key={title} className="space-y-4">
+              <h4 className="text-lg font-medium text-[#08090a] dark:text-white flex items-center gap-2">
+                <span className="h-1 w-1 rounded-full bg-gray-900 dark:bg-emerald-500"></span>
+                {title}
+              </h4>
+              {paragraphs.map((text) => (
+                <p
+                  key={text}
+                  className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed"
+                >
+                  {text}
+                </p>
+              ))}
+            </div>
+          ))}
         </div>
       </SpotlightCard>
     </section>
