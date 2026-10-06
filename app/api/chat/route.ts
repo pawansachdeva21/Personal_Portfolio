@@ -1,27 +1,38 @@
-// app/api/chat/route.ts
-import { GoogleGenAI, Content, Part, PartListUnion } from "@google/genai";
+import { GoogleGenAI, Content } from "@google/genai";
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import profile from "@/knowledge/profile.json";
 
 const ai = new GoogleGenAI({});
 
-function loadProfile() {
-  const filePath = path.join(process.cwd(), "knowledge", "profile.json");
-  const raw = fs.readFileSync(filePath, "utf-8");
-  return JSON.parse(raw); // Array of {title, content}
-}
+const MAX_MESSAGES = 20;
+const MAX_MESSAGE_LENGTH = 2000;
 
-function getFullContext(profileData: { title: string; content: string }[]) {
-  return profileData.map((d) => `${d.title}:\n${d.content}`).join("\n\n");
-}
+// Built once per server instance instead of reading the file on every request
+const SYSTEM_INSTRUCTION = `You are Pawan Sachdeva's AI assistant.
+You can use the following information to help answer questions, but if the question is unrelated, answer normally.
+
+${profile.map((d) => `${d.title}:\n${d.content}`).join("\n\n")}`;
 
 interface ChatMessage {
   role: "user" | "assistant";
   content: string;
 }
 
-function convertToGeminiContent(messages: ChatMessage[]): Content[] {
+function isValidMessages(messages: unknown): messages is ChatMessage[] {
+  return (
+    Array.isArray(messages) &&
+    messages.length > 0 &&
+    messages.every(
+      (m) =>
+        (m?.role === "user" || m?.role === "assistant") &&
+        typeof m.content === "string" &&
+        m.content.length <= MAX_MESSAGE_LENGTH
+    ) &&
+    messages[messages.length - 1].role === "user"
+  );
+}
+
+function toGeminiContent(messages: ChatMessage[]): Content[] {
   return messages.map((m) => ({
     role: m.role === "assistant" ? "model" : "user",
     parts: [{ text: m.content }],
@@ -29,49 +40,47 @@ function convertToGeminiContent(messages: ChatMessage[]): Content[] {
 }
 
 export async function POST(req: Request) {
+  let messages: unknown;
   try {
-    const { messages } = (await req.json()) as { messages: ChatMessage[] };
-    if (!messages || messages.length === 0)
-      return NextResponse.json(
-        { error: "No messages provided" },
-        { status: 400 }
-      );
+    ({ messages } = await req.json());
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
 
-    const profileData = loadProfile();
-    const contextText = getFullContext(profileData);
+  if (!isValidMessages(messages)) {
+    return NextResponse.json({ error: "Invalid messages" }, { status: 400 });
+  }
 
-    // Updated system message: reference info, but allow normal AI responses
-    const systemMessage: ChatMessage = {
-      role: "user",
-      content: `You are Pawan Sachdeva's AI assistant. 
-You can use the following information to help answer questions, but if the question is unrelated, answer normally.\n\n${contextText}`,
-    };
+  // Keep only the most recent turns to bound token usage; history must
+  // start with a user turn, so drop leading assistant messages (e.g. the
+  // client's welcome message)
+  const recent = messages.slice(-MAX_MESSAGES);
+  const firstUser = recent.findIndex((m) => m.role === "user");
+  const contents = toGeminiContent(recent.slice(firstUser));
 
-    const allMessages: ChatMessage[] = [systemMessage, ...messages];
-    const contents = convertToGeminiContent(allMessages);
-
-    const lastContent = contents[contents.length - 1];
-    const history = contents.slice(0, -1);
-
+  try {
     const chat = ai.chats.create({
       model: "gemini-2.5-flash",
-      history,
+      history: contents.slice(0, -1),
+      config: { systemInstruction: SYSTEM_INSTRUCTION },
     });
-
-    const messageToSend: PartListUnion = lastContent.parts as Part[];
 
     const resultStream = await chat.sendMessageStream({
-      message: messageToSend,
+      message: contents[contents.length - 1].parts!,
     });
 
+    const encoder = new TextEncoder();
     const readableStream = new ReadableStream({
       async start(controller) {
-        const encoder = new TextEncoder();
-        for await (const chunk of resultStream) {
-          const text = chunk.text;
-          if (text) controller.enqueue(encoder.encode(text));
+        try {
+          for await (const chunk of resultStream) {
+            if (chunk.text) controller.enqueue(encoder.encode(chunk.text));
+          }
+          controller.close();
+        } catch (error) {
+          console.error("Gemini stream error:", error);
+          controller.error(error);
         }
-        controller.close();
       },
     });
 
