@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import { cn } from "@/app/lib/utils";
-import { useTheme } from "next-themes";
 
 export interface SpotlightCardProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -13,13 +12,16 @@ export interface SpotlightCardProps
   lightGradientColor?: string;
   glowEffect?: boolean;
   multiSpotlight?: boolean;
-  spotlightBlur?: boolean;
   glowSize?: number;
   glowOpacity?: number;
-  animated?: boolean;
-  initialHovered?: boolean;
   disableScale?: boolean;
 }
+
+const spotlight = (x: string, y: string, size: number | string) =>
+  `radial-gradient(${size}px circle at ${x} ${y}, var(--spotlight-color) 0%, transparent 65%)`;
+
+// Light theme uses --spot-light, dark theme --spot-dark (set inline below)
+const themedColor = "[--spot:var(--spot-light)] dark:[--spot:var(--spot-dark)]";
 
 export function SpotlightCard({
   children,
@@ -30,120 +32,63 @@ export function SpotlightCard({
   lightGradientColor,
   glowEffect = false,
   multiSpotlight = false,
-  spotlightBlur = false,
   glowSize = 100,
   glowOpacity = 0.15,
-  animated = false,
-  initialHovered = false,
   disableScale = false,
+  style,
   ...props
 }: SpotlightCardProps) {
   const divRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState<{ x: number; y: number }>({
-    x: 0,
-    y: 0,
-  });
-  const [secondaryPosition, setSecondaryPosition] = useState<{
-    x: number;
-    y: number;
-  }>({
-    x: 0,
-    y: 0,
-  });
-  const [opacity, setOpacity] = useState(initialHovered ? 1 : 0);
-  const [hovered, setHovered] = useState(initialHovered);
-  const { theme } = useTheme();
 
-  useEffect(() => {
-    if (animated && hovered) {
-      const interval = setInterval(() => {
-        setSecondaryPosition({
-          x: Math.random() * (divRef.current?.offsetWidth || 0),
-          y: Math.random() * (divRef.current?.offsetHeight || 0),
-        });
-      }, 1000);
-      return () => clearInterval(interval);
-    }
-  }, [animated, hovered]);
-
+  // Write the cursor position straight to CSS variables so mouse movement
+  // never triggers a React re-render of the card or its children
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!divRef.current) return;
-
     const div = divRef.current;
+    if (!div) return;
     const rect = div.getBoundingClientRect();
-
-    const newPosition = {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    };
-
-    setPosition(newPosition);
-
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    div.style.setProperty("--x", `${x}px`);
+    div.style.setProperty("--y", `${y}px`);
     if (multiSpotlight) {
-      setSecondaryPosition({
-        x: div.offsetWidth - (e.clientX - rect.left),
-        y: div.offsetHeight - (e.clientY - rect.top),
-      });
+      div.style.setProperty("--x2", `${rect.width - x}px`);
+      div.style.setProperty("--y2", `${rect.height - y}px`);
     }
   };
 
-  const handleMouseEnter = () => {
-    setOpacity(1);
-    setHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setOpacity(0);
-    setHovered(false);
-  };
-
-  const getSpotlightBackground = (
-    pos: { x: number; y: number },
-    size: number,
-    blur = false
-  ) => {
-    return `radial-gradient(${size}px ${blur ? "ellipse" : "circle"} at ${
-      pos.x
-    }px ${pos.y}px, 
-      var(--spotlight-color) 0%, 
-      transparent ${blur ? "75%" : "65%"})`;
-  };
-
-  // Determine which gradient color to use based on the current theme
-  const currentGradientColor =
-    theme === "light" && lightGradientColor
-      ? lightGradientColor
-      : gradientColor;
+  const mixColor = (opacity: number) =>
+    `color-mix(in srgb, var(--spot), transparent ${(1 - opacity) * 100}%)`;
 
   return (
     <div
-      ref={(node) => {
-        divRef.current = node;
-      }}
+      ref={divRef}
       className={cn(
-        "relative w-full overflow-hidden rounded-xl border border-border/40 bg-background transition-transform duration-300",
-        hovered && !disableScale && "scale-[1.02]",
+        "group/spotlight relative w-full overflow-hidden rounded-xl border border-border/40 bg-background transition-transform duration-300",
+        !disableScale && "hover:scale-[1.02]",
+        themedColor,
         className
       )}
+      style={
+        {
+          "--x": "0px",
+          "--y": "0px",
+          "--x2": "0px",
+          "--y2": "0px",
+          "--spot-dark": gradientColor,
+          "--spot-light": lightGradientColor ?? gradientColor,
+          ...style,
+        } as React.CSSProperties
+      }
       onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       {...props}
     >
       {/* Main Spotlight */}
       <div
-        className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300"
+        className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 group-hover/spotlight:opacity-100"
         style={
           {
-            opacity,
-            background: getSpotlightBackground(
-              position,
-              spotlightSize,
-              spotlightBlur
-            ),
-            ["--spotlight-color" as string]: `color-mix(in srgb, var(--gradient-color, ${currentGradientColor}), transparent ${
-              (1 - spotlightOpacity) * 100
-            }%)`,
+            "--spotlight-color": mixColor(spotlightOpacity),
+            background: spotlight("var(--x)", "var(--y)", spotlightSize),
           } as React.CSSProperties
         }
       />
@@ -151,18 +96,11 @@ export function SpotlightCard({
       {/* Secondary Spotlight */}
       {multiSpotlight && (
         <div
-          className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300"
+          className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 group-hover/spotlight:opacity-70"
           style={
             {
-              opacity: opacity * 0.7,
-              background: getSpotlightBackground(
-                secondaryPosition,
-                spotlightSize * 0.8,
-                spotlightBlur
-              ),
-              ["--spotlight-color" as string]: `color-mix(in srgb, var(--gradient-color, ${currentGradientColor}), transparent ${
-                (1 - spotlightOpacity * 0.8) * 100
-              }%)`,
+              "--spotlight-color": mixColor(spotlightOpacity * 0.8),
+              background: spotlight("var(--x2)", "var(--y2)", spotlightSize * 0.8),
             } as React.CSSProperties
           }
         />
@@ -171,12 +109,12 @@ export function SpotlightCard({
       {/* Glow Effect */}
       {glowEffect && (
         <div
-          className="pointer-events-none absolute -inset-px opacity-0 blur-xl transition-opacity duration-300"
+          className="pointer-events-none absolute -inset-px opacity-0 blur-xl transition-opacity duration-300 group-hover/spotlight:opacity-[var(--glow-opacity)]"
           style={
             {
-              opacity: opacity * glowOpacity,
-              background: getSpotlightBackground(position, glowSize),
-              ["--spotlight-color" as string]: `color-mix(in srgb, var(--gradient-color, ${currentGradientColor}), transparent 15%)`,
+              "--glow-opacity": glowOpacity,
+              "--spotlight-color": mixColor(0.85),
+              background: spotlight("var(--x)", "var(--y)", glowSize),
             } as React.CSSProperties
           }
         />

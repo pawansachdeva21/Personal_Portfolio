@@ -18,7 +18,8 @@ const MobileNav = ({
   onClose,
   sections = NAV_SECTIONS,
 }: MobileNavProps) => {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -125,7 +126,7 @@ const MobileNav = ({
 
             {/* Theme Toggle */}
             <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              onClick={() => setTheme(isDark ? "light" : "dark")}
               className={cn(
                 "group flex items-center justify-between px-4 py-3.5 text-base rounded-sm relative overflow-hidden w-full",
                 "text-[#737373] dark:text-[#A1A1AA]",
@@ -139,7 +140,7 @@ const MobileNav = ({
                   : "translateX(2rem) scale(0.95)",
               }}
               aria-label="Toggle theme"
-              title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              title={`Switch to ${isDark ? "light" : "dark"} mode`}
             >
               {/* Background Highlight */}
               <div
@@ -167,12 +168,12 @@ const MobileNav = ({
 
               {/* Content */}
               <span className="relative z-10 font-normal transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-black dark:group-hover:text-white flex items-center gap-2">
-                {theme === "dark" ? "Light" : "Dark"} Mode
+                {isDark ? "Light" : "Dark"} Mode
               </span>
 
               {/* Icon */}
               <div className="relative z-10">
-                {theme === "dark" ? (
+                {isDark ? (
                   <Sun className="w-4 h-4 text-gray-400 dark:text-gray-500 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-[#08090a] dark:group-hover:text-white" />
                 ) : (
                   <Moon className="w-4 h-4 text-gray-400 dark:text-gray-500 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-[#08090a] dark:group-hover:text-white" />

@@ -7,6 +7,7 @@ import {
 import HeadingBadge from "@/app/components/heading-badge";
 import { SpotlightCard } from "@/app/components/ui/spotlight-card";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
+import { GITHUB_URL } from "@/app/lib/constants";
 
 export function ContactSection() {
   return (
@@ -36,7 +37,6 @@ export function ContactSection() {
           lightGradientColor="rgba(8, 9, 10, 0.1)"
           spotlightSize={400}
           multiSpotlight={true}
-          initialHovered={false}
           disableScale={true}
           className="p-8 rounded-sm border border-gray-200/80 dark:border-gray-800/50 bg-white dark:bg-[#0a0a0a] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300"
         >
@@ -61,7 +61,7 @@ export function ContactSection() {
 
               <div className="flex items-center justify-center gap-4 pt-4">
                 <a
-                  href="https://github.com/pawansachdeva21"
+                  href={GITHUB_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group p-3 rounded-sm bg-gray-100 dark:bg-[#191a1a] text-[#08090a] dark:text-emerald-500 hover:bg-gray-200 dark:hover:bg-emerald-500/10 transition-colors relative overflow-hidden"
