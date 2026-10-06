@@ -30,30 +30,34 @@ export function ProjectCard({ project }: ProjectCardProps) {
       lightGradientColor="rgba(15, 23, 42, 0.15)"
       spotlightSize={300}
       disableScale={true}
-      className="flex items-start overflow-hidden rounded-2xl border border-gray-200 dark:border-white/[0.08] bg-white/70 dark:bg-white/[0.02] transition-all duration-300 ease-in-out hover:border-gray-900/30 dark:hover:border-emerald-500/30 w-full cursor-pointer group"
+      className="flex items-stretch overflow-hidden rounded-2xl border border-gray-200 dark:border-white/[0.08] bg-white/70 dark:bg-white/[0.02] transition-all duration-300 ease-in-out hover:border-gray-900/30 dark:hover:border-emerald-500/30 w-full cursor-pointer group"
     >
-      <div className="flex sm:flex-row flex-col w-full ">
+      <div className="flex sm:flex-row flex-col w-full h-full">
         {(project.imageUrl || project.videoUrl) && (
-          <div className="relative hidden md:block md:w-60 overflow-hidden border border-black">
+          <div className="relative hidden md:block md:w-60 shrink-0 overflow-hidden border-r border-gray-200 bg-gray-50 dark:bg-transparent dark:border dark:border-black">
             {project.imageUrl && (
-            <div className="absolute top-5 left-5 w-48 h-40 p-1">
-              <div className="relative size-full overflow-hidden rounded-sm">
-                <Image
-                  src={project.imageUrl}
-                  alt={project.title}
-                  fill
-                  sizes="192px"
-                  className="object-cover object-top"
-                />
+              <div className="absolute top-5 left-5 w-48 h-40 p-1">
+                <div className="relative size-full overflow-hidden rounded-sm shadow-md ring-1 ring-black/5 dark:shadow-none dark:ring-0">
+                  <Image
+                    src={project.imageUrl}
+                    alt={project.title}
+                    fill
+                    sizes="192px"
+                    className="object-cover object-top"
+                  />
+                </div>
               </div>
-            </div>
-          )}
+            )}
             {project.videoUrl && (
-              <LazyVideo
-                src={project.videoUrl}
-                poster={project.posterUrl}
-                className="absolute top-5 left-5 w-48 h-40 object-cover p-1 rounded-sm"
-              />
+              <div className="absolute top-5 left-5 w-48 h-40 p-1">
+                <div className="relative size-full overflow-hidden rounded-sm shadow-md ring-1 ring-black/5 dark:shadow-none dark:ring-0">
+                  <LazyVideo
+                    src={project.videoUrl}
+                    poster={project.posterUrl}
+                    className="size-full object-cover"
+                  />
+                </div>
+              </div>
             )}
           </div>
         )}
