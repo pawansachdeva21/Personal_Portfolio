@@ -1,10 +1,5 @@
-import {
-  DownloadCloud,
-  Mail,
-  MessageSquare,
-  PhoneCallIcon,
-} from "lucide-react";
-import HeadingBadge from "@/app/components/heading-badge";
+import { DownloadCloud, Mail, PhoneCallIcon } from "lucide-react";
+import { SectionHeader } from "@/app/components/section-header";
 import { SpotlightCard } from "@/app/components/ui/spotlight-card";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { GITHUB_URL } from "@/app/lib/constants";
@@ -13,23 +8,25 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="w-full py-10 flex flex-col items-start justify-start gap-y-10"
+      className="w-full flex flex-col items-start justify-start gap-y-10"
     >
-      <div className="flex flex-col items-start justify-start gap-5">
-        <HeadingBadge title="Contact" icon={<MessageSquare size={14} />} />
-        <div className="space-y-2">
-          <h3 className="text-3xl font-semibold">
+      <SectionHeader
+        eyebrow="Contact"
+        title={
+          <>
             Let&apos;s{" "}
             <span className="text-[#08090a] dark:text-emerald-500">
               Connect
             </span>
-          </h3>
-          <p className="text-[#737373] dark:text-[#A1A1AA] text-sm">
+          </>
+        }
+        description={
+          <>
             I&apos;m always excited to collaborate on interesting projects or
             just have a great tech conversation!
-          </p>
-        </div>
-      </div>
+          </>
+        }
+      />
 
       <div className="w-full">
         <SpotlightCard
@@ -38,7 +35,7 @@ export function ContactSection() {
           spotlightSize={400}
           multiSpotlight={true}
           disableScale={true}
-          className="p-8 rounded-sm border border-gray-200/80 dark:border-gray-800/50 bg-white dark:bg-[#0a0a0a] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300"
+          className="p-8 rounded-2xl border border-gray-200 dark:border-white/[0.08] bg-white/70 dark:bg-white/[0.02] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300"
         >
           <div className="max-w-2xl mx-auto space-y-8">
             <div className="text-center space-y-6">

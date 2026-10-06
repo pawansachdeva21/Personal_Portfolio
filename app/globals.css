@@ -182,3 +182,8 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+/* Offset in-page anchor jumps so the fixed navbar doesn't cover headings */
+section[id] {
+  scroll-margin-top: 6rem;
+}

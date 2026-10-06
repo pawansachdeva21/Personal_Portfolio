@@ -70,7 +70,7 @@ export function Navbar({ sections = NAV_SECTIONS }: NavbarProps) {
       <nav
         ref={navRef}
         className={cn(
-          "fixed top-3 sm:top-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between w-[95%] max-w-[670px] lg:max-w-[68rem] py-2 px-4 rounded-sm transition-all duration-300 overflow-hidden",
+          "fixed top-3 sm:top-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between w-[95%] max-w-[670px] lg:max-w-[68rem] py-2 px-4 rounded-2xl transition-all duration-300 overflow-hidden",
           scrolled
             ? "bg-white/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border border-gray-200/50 dark:border-gray-800/50 shadow-lg"
             : "bg-white/60 dark:bg-[#0a0a0a]/60 backdrop-blur-sm border border-gray-200/60 dark:border-gray-800/30"
@@ -81,8 +81,8 @@ export function Navbar({ sections = NAV_SECTIONS }: NavbarProps) {
         <div className="pointer-events-none absolute inset-0 opacity-30 bg-[radial-gradient(300px_circle_at_var(--mx,0px)_var(--my,0px),rgba(8,9,10,0.15),transparent_40%)] dark:bg-[radial-gradient(300px_circle_at_var(--mx,0px)_var(--my,0px),rgba(34,197,94,0.15),transparent_40%)]" />
 
         {/* Subtle Glow Border */}
-        <div className="absolute inset-0 rounded-sm opacity-20 blur-sm">
-          <div className="absolute inset-px rounded-sm border border-emerald-500/20" />
+        <div className="absolute inset-0 rounded-2xl opacity-20 blur-sm">
+          <div className="absolute inset-px rounded-2xl border border-emerald-500/20" />
         </div>
 
         <div className="flex-shrink-0 relative">

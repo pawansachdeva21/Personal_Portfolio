@@ -1,6 +1,6 @@
-import HeadingBadge from "@/app/components/heading-badge";
+import { SectionHeader } from "@/app/components/section-header";
 import { SpotlightCard } from "@/app/components/ui/spotlight-card";
-import { Activity, TrendingUp, ExternalLink, Github } from "lucide-react";
+import { Activity, ExternalLink, Github } from "lucide-react";
 import { CombinedActivityTracker } from "../activity/combined-activity-tracker";
 import { GitHubLanguages } from "../activity/github-languages";
 import { GITHUB_URL } from "@/app/lib/constants";
@@ -9,33 +9,32 @@ export function ActivitySection() {
   return (
     <section
       id="activity"
-      className="w-full pt-10 flex flex-col items-start justify-start gap-y-8"
+      className="w-full flex flex-col items-start justify-start gap-y-8"
     >
-      <div className="flex flex-col items-start justify-start gap-5">
-        <HeadingBadge
-          title="Activity Tracker"
-          icon={<TrendingUp size={14} />}
-        />
-        <div className="space-y-2">
-          <h3 className="text-3xl font-semibold">
+      <SectionHeader
+        eyebrow="Activity Tracker"
+        title={
+          <>
             My Coding{" "}
             <span className="text-[#08090a] dark:text-emerald-500">
               Journey
             </span>
-          </h3>
-          <p className="text-[#737373] dark:text-[#A1A1AA] text-sm">
+          </>
+        }
+        description={
+          <>
             Track my GitHub activities, streaks, and programming languages
             usage.
-          </p>
-        </div>
-      </div>
+          </>
+        }
+      />
 
       <SpotlightCard
         gradientColor="rgba(34, 197, 94, 0.1)"
         lightGradientColor="rgba(8, 9, 10, 0.1)"
         spotlightSize={400}
         disableScale={true}
-        className="p-6 rounded-sm border border-gray-200/80 dark:border-gray-800/50 bg-white dark:bg-[#0a0a0a] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300 w-full"
+        className="p-6 rounded-2xl border border-gray-200 dark:border-white/[0.08] bg-white/70 dark:bg-white/[0.02] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300 w-full"
       >
         <div className="space-y-4">
           <div className="flex items-center gap-2">
@@ -56,7 +55,7 @@ export function ActivitySection() {
         lightGradientColor="rgba(8, 9, 10, 0.1)"
         spotlightSize={400}
         disableScale={true}
-        className="p-6 rounded-sm border border-gray-200/80 dark:border-gray-800/50 bg-white dark:bg-[#0a0a0a] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300"
+        className="p-6 rounded-2xl border border-gray-200 dark:border-white/[0.08] bg-white/70 dark:bg-white/[0.02] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300"
       >
         <div className="space-y-4">
           <div className="flex items-center justify-between">

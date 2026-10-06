@@ -1,4 +1,4 @@
-import HeadingBadge from "@/app/components/heading-badge";
+import { SectionHeader } from "@/app/components/section-header";
 import { SpotlightCard } from "@/app/components/ui/spotlight-card";
 import {
   BotIcon,
@@ -6,7 +6,6 @@ import {
   MonitorIcon,
   CodeIcon,
   ServerIcon,
-  Wrench,
 } from "lucide-react";
 
 type Service = {
@@ -58,23 +57,25 @@ export function ServicesSection() {
   return (
     <section
       id="services"
-      className="w-full pt-10 flex flex-col items-start justify-start gap-y-10"
+      className="w-full flex flex-col items-start justify-start gap-y-10"
     >
-      <div className="flex flex-col items-start justify-start gap-5">
-        <HeadingBadge title="Services" icon={<Wrench size={14} />} />
-        <div className="space-y-2">
-          <h3 className="text-3xl font-semibold">
+      <SectionHeader
+        eyebrow="Services"
+        title={
+          <>
             <span className="text-[#08090a] dark:text-emerald-500">
               Services
             </span>{" "}
             I offer
-          </h3>
-          <p className="text-[#737373] dark:text-[#A1A1AA] text-sm">
+          </>
+        }
+        description={
+          <>
             Here are the professional services I provide to help bring your
             digital ideas to life.
-          </p>
-        </div>
-      </div>
+          </>
+        }
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-full">
         {services.map((service, index) => (
@@ -86,7 +87,7 @@ export function ServicesSection() {
             glowEffect={true}
             glowSize={150}
             glowOpacity={0.15}
-            className="lg:last:odd:col-span-2 p-6 rounded-sm border border-gray-200/80 dark:border-gray-800/50 bg-white dark:bg-[#0a0a0a] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300"
+            className="lg:last:odd:col-span-2 p-6 rounded-2xl border border-gray-200 dark:border-white/[0.08] bg-white/70 dark:bg-white/[0.02] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300"
           >
             <div className="flex flex-col xs:flex-row items-start gap-4">
               <div className="flex-shrink-0 mt-1">{service.icon}</div>

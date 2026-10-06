@@ -57,7 +57,7 @@ export function CertificationCard({
         lightGradientColor="rgba(15, 23, 42, 0.15)"
         spotlightSize={250}
         disableScale={true}
-        className="overflow-hidden rounded-sm border border-gray-200/80 dark:border-gray-800/50 transition-all duration-300 ease-in-out hover:border-gray-900/30 dark:hover:border-emerald-500/30 h-full"
+        className="overflow-hidden rounded-2xl border border-gray-200 dark:border-white/[0.08] bg-white/70 dark:bg-white/[0.02] transition-all duration-300 ease-in-out hover:border-gray-900/30 dark:hover:border-emerald-500/30 h-full"
       >
         <div className="p-5 space-y-4">
           {/* Header with Issuer Badge and Verified */}

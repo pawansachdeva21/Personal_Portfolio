@@ -29,28 +29,28 @@ export function ProjectCard({ project }: ProjectCardProps) {
       lightGradientColor="rgba(15, 23, 42, 0.15)"
       spotlightSize={300}
       disableScale={true}
-      className="flex items-start overflow-hidden rounded-sm border border-gray-200/80 dark:border-gray-800/50 transition-all duration-300 ease-in-out hover:border-gray-900/30 dark:hover:border-emerald-500/30 w-full cursor-pointer group"
+      className="flex items-start overflow-hidden rounded-2xl border border-gray-200 dark:border-white/[0.08] bg-white/70 dark:bg-white/[0.02] transition-all duration-300 ease-in-out hover:border-gray-900/30 dark:hover:border-emerald-500/30 w-full cursor-pointer group"
     >
       <div className="flex sm:flex-row flex-col w-full ">
         {(project.imageUrl || project.videoUrl) && (
-        <div className="relative hidden md:block md:w-60 overflow-hidden border border-black">
-          {project.imageUrl && (
-            <Image
-              src={project.imageUrl}
-              alt={project.title}
-              fill
-              sizes="240px"
-              className="object-cover p-1 rounded-sm"
-            />
-          )}
-          {project.videoUrl && (
-            <LazyVideo
-              src={project.videoUrl}
-              poster={project.posterUrl}
-              className="absolute top-5 left-5 w-48 h-40 object-cover p-1 rounded-sm"
-            />
-          )}
-        </div>
+          <div className="relative hidden md:block md:w-60 overflow-hidden border border-black">
+            {project.imageUrl && (
+              <Image
+                src={project.imageUrl}
+                alt={project.title}
+                fill
+                sizes="240px"
+                className="object-cover p-1 rounded-sm"
+              />
+            )}
+            {project.videoUrl && (
+              <LazyVideo
+                src={project.videoUrl}
+                poster={project.posterUrl}
+                className="absolute top-5 left-5 w-48 h-40 object-cover p-1 rounded-sm"
+              />
+            )}
+          </div>
         )}
 
         <div className="w-full sm:flex-1 sm:min-w-0 flex flex-col p-5 space-y-3">

@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import HeadingBadge from "@/app/components/heading-badge";
+import { SectionHeader } from "@/app/components/section-header";
 import { SpotlightCard } from "@/app/components/ui/spotlight-card";
-import { Building2, Calendar, ChevronRight, Briefcase } from "lucide-react";
+import { Building2, Calendar, ChevronRight } from "lucide-react";
 import { cn } from "@/app/lib/utils";
 
 type Experience = {
@@ -95,30 +95,32 @@ export function ExperienceSection() {
   };
 
   return (
-    <section id="experience" className="pt-10">
+    <section id="experience" className="w-full">
       <div className="space-y-8">
-        <div className="flex flex-col items-start justify-start gap-5">
-          <HeadingBadge title="Experience" icon={<Briefcase size={14} />} />
-          <div className="space-y-2">
-            <h3 className="text-3xl font-semibold">
+        <SectionHeader
+          eyebrow="Experience"
+          title={
+            <>
               Work{" "}
               <span className="text-[#08090a] dark:text-emerald-500">
                 Experience
               </span>
-            </h3>
-            <p className="text-[#737373] dark:text-[#A1A1AA] text-sm">
+            </>
+          }
+          description={
+            <>
               Companies I&apos;ve worked with and the projects I&apos;ve been
               involved in
-            </p>
-          </div>
-        </div>
+            </>
+          }
+        />
 
         <div className="space-y-3">
           {experiences.map((experience, index) => (
             <SpotlightCard
               key={index}
               className={cn(
-                "p-6 cursor-pointer transition-all duration-300 group rounded-sm border border-gray-200/80 dark:border-gray-800/50 ease-in-out hover:border-gray-900/30 dark:hover:border-emerald-500/30",
+                "p-6 cursor-pointer transition-all duration-300 group rounded-2xl border border-gray-200 dark:border-white/[0.08] ease-in-out hover:border-gray-900/30 dark:hover:border-emerald-500/30",
                 "hover:shadow-lg hover:shadow-gray-200/50 dark:hover:shadow-emerald-500/5",
                 expandedIndex === index ? "bg-opacity-10" : "",
               )}
