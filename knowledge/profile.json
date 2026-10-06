@@ -1,23 +1,27 @@
 [
   {
     "title": "Introduction and Professional Summary",
-    "content": "Hi, I'm Pawan Sachdeva, a Senior Software Engineer passionate about crafting seamless digital experiences. I specialize in building web apps with Next.js, React, TypeScript, Tailwind CSS, Django, Node.js, and more. I'm always excited to tackle new challenges where I can create value and grow as a coder."
+    "content": "Hi, I'm Pawan Kumar Sachdeva, a Senior Full Stack & AI Engineer with 5+ years of experience, based in Gurugram, India. I build full-stack apps and GenAI systems with React, Next.js, Python, FastAPI, LangChain, LangGraph and RAG. From AI chatbots and agent workflows to platforms serving millions of users, I love turning complex problems into products people actually use."
   },
   {
     "title": "Detailed About Me - Who I Am",
-    "content": "I'm a passionate full-stack developer with a keen eye for design and a love for creating seamless user experiences. With over 5 years of experience in web development, I've worked on a range of projects—from small business websites to complex enterprise applications. My approach blends technical expertise with creative problem-solving, ensuring each project is not just functional, but also visually engaging and user-friendly."
+    "content": "I'm a full-stack and AI engineer with over 5 years of experience building products end to end, from React and Next.js frontends to Python and FastAPI services and LLM-powered workflows. Today I lead development of an AI-enabled CRM platform serving 2M+ users across 5000+ schools. I build AI that does real work: conversational agents with LangChain and LangGraph, RAG pipelines backed by Qdrant and PostgreSQL, and AI-generated call summaries that cut manual documentation by 90%."
   },
   {
     "title": "My Development Journey",
-    "content": "My tech journey began in 2021 after graduating college, driven by a growing interest in coding during my student years. Fascinated by how things work behind the scenes, I chose to pursue software development—starting with web development as my gateway. Since then, I've built real-world projects, explored new technologies, and collaborated with amazing teams. Each step has sharpened my skills and deepened my passion for learning and building impactful digital solutions."
+    "content": "My tech journey began in 2021 after earning my B.Tech from Guru Nanak Dev Engineering College, Ludhiana (IKGPTU, 2017 - 2021). I started at Cognizant building accessible pharma dashboards, then moved to Laminaar Aviation Infotech, where I led a team of 4 building airline operational modules with React and Node.js. At Hitachi MGRM Net, my work grew from real-time calling with WebRTC and Asterisk into Generative AI: chatbots, agent workflows, and RAG systems in production. I've also shipped AI side projects like use-history-ai on NPM and the Gemini-powered assistant on my portfolio."
+  },
+  {
+    "title": "Education",
+    "content": "Bachelor of Technology from Guru Nanak Dev Engineering College, Ludhiana (IKGPTU), 2017 - 2021."
   },
   {
     "title": "Life Beyond Coding (Hobbies and Fitness)",
-    "content": "Outside of tech, I enjoy playing and playing cricket, following football, hitting the gym and playing chess—all of which fuel my creativity and keep me inspired. I'm also passionate about fitness and love hitting the gym regularly to stay energized and focused in both work and life."
+    "content": "Outside of tech, I enjoy playing cricket, following football, hitting the gym and playing chess, all of which fuel my creativity and keep me inspired. I'm also passionate about fitness and love hitting the gym regularly to stay energized and focused in both work and life."
   },
   {
     "title": "Contact Information and Social Links",
-    "content": "I'm always excited to collaborate on interesting projects or just have a great tech conversation! You can contact me via phone at +91-8968692484 or via email at pawansachdeva1998@gmail.com. You can find my profiles on GitHub (https://github.com/pwsd21) and LinkedIn (https://www.linkedin.com/in/pawan-sachdeva-2a231017b/). My resume is available at: https://drive.google.com/file/d/1mkvemYBaZdywAaqNek1TTm9S7qvjWOyx/view?usp=sharing. I typically respond within 1 hour."
+    "content": "I'm always excited to collaborate on interesting projects or just have a great tech conversation! You can contact me via phone at +91-8968692484 or via email at pawansachdeva1998@gmail.com. You can find my profiles on GitHub (https://github.com/pawansachdeva21) and LinkedIn (https://www.linkedin.com/in/pawan-sachdeva-2a231017b/). My resume is available at: https://drive.google.com/file/d/1mkvemYBaZdywAaqNek1TTm9S7qvjWOyx/view?usp=sharing. I typically respond within 1 hour."
   },
   {
     "title": "Current Work Preferences & Availability",
@@ -32,75 +36,71 @@
     "content": "• HackerRank Certification: JavaScript (Intermediate) - Credential ID: D2FDA6B7A920 - https://www.hackerrank.com/certificates/d2fda6b7a920\n• HackerRank Certification: Frontend Developer (React) - Credential ID: 75F161A4DE6A - https://www.hackerrank.com/certificates/75f161a4de6a\n• Azure DevOps Training from Laminaar Aviation Infotech - Credential ID: H2223-6243-CCT-ADO-074 - https://drive.google.com/file/d/1Q3Mjy4buU-fmMcysPEdNNXDmHQ0PPi94/view\n• NPTEL Certification: The Joy of Computing using Python - https://drive.google.com/file/d/1vFH7FqzLIZ4oyKdJSn02feJpRahwmXEq/view"
   },
   {
-    "title": "Work Experience: Senior Software Engineer at Hitachi Mgrm Net (June 2024 - Present)",
-    "content": "Led CRM platform development for 8M+ users across 5000+ schools using Next.js and a scalable micro-frontend architecture. Developed responsive HTML/CSS email templates from Figma designs for CRM communication workflows using FreeMarker-style templating, ensuring cross-client compatibility (Gmail, Outlook). Integrated campaign communication templates within CRM journeys aligned with marketing automation platforms (Eloqua, Salesforce Marketing Cloud). Integrated AI-driven call summaries with RingCentral and Jitsi, reducing manual documentation by 90%. Technologies used: Next.js, React, TypeScript, HTML Email, CSS, FreeMarker, Eloqua, Salesforce Marketing Cloud, Figma, Node.js."
+    "title": "Work Experience: Software Developer at Hitachi MGRM Net, Gurugram (June 2024 - Present)",
+    "content": "Led development of an AI-enabled CRM platform serving 2M+ users across 5000+ schools using NestJS and a scalable micro-frontend architecture. Built an AI-powered chatbot and conversational workflows using LangChain, LangGraph, and RAG, enabling context-aware responses and intelligent agent interactions within the CRM ecosystem. Designed and implemented RAG pipelines using Qdrant for vector search and PostgreSQL for persistent data, integrating FastAPI services to support scalable AI-powered workflows. Implemented real-time calling in the agent module with WebRTC, JsSIP, Asterisk, and Socket.IO, improving agent response time by 50%. Integrated AI-driven call summaries with RingCentral and added Jitsi for seamless in-browser video calls, reducing manual documentation by 90%. Technologies used: NestJS, LangChain, LangGraph, RAG, Qdrant, PostgreSQL, FastAPI, WebRTC, JsSIP, Asterisk, Socket.IO, RingCentral, Jitsi."
   },
   {
-    "title": "Work Experience: Associate Software Engineer at Laminaar Aviation Infotech (Feb 2023 - March 2024) -> Impacted by Mass Layoffs",
-    "content": "Led a team of 4 to build airline operational modules using React.js, RTK and a custom MUI library. Achieved 80%+ test coverage using Jest, RTL and MSW, maintaining <5% code duplication (SonarQube). Deployed Node.js services on AWS EC2 with PM2, increasing uptime and reliability for airline crew systems. Technologies used: React, TypeScript, Jest, React Testing Library, Puppeteer, MS SQL."
+    "title": "Work Experience: Associate Software Engineer at Laminaar Aviation Infotech, Bengaluru (February 2023 - March 2024)",
+    "content": "Led a team of 4 to build airline operational modules using React.js, RTK, and a custom library. Developed backend services using Node.js for airline crew and operational management systems. Achieved over 85% test coverage using Jest, React Testing Library (RTL), and MSW, while maintaining less than 5% code duplication. Deployed Node.js services on Azure App Service, improving uptime and reliability for airline crew systems. Technologies used: React.js, Redux Toolkit, Node.js, Jest, React Testing Library, MSW, Azure App Service."
   },
   {
-    "title": "Work Experience: Programmer Analyst Trainee at Cognizant (January 2021 - January 2023)",
-    "content": "Implemented pharma dashboards using React + Material UI V5 and REST APIs with responsive UI across all major browsers. Ensured accessibility compliance and delivered component-driven frontends aligned with UX standards. Integrated AWS services (EC2, S3, IAM) via CI/CD (Jenkins) to streamline deployments. Technologies used: React, JavaScript, REST APIs, Material UI, MongoDB, Node.js."
+    "title": "Work Experience: Programmer Analyst Trainee at Cognizant, Bengaluru (July 2021 - July 2022)",
+    "content": "Implemented pharma dashboards using React and Material UI v5, consuming REST APIs with a fully responsive UI across all major browsers. Ensured accessibility compliance (WCAG) and delivered component-driven frontends aligned with established UX standards. Integrated AWS services through CI/CD pipelines (Jenkins) to streamline deployments. Technologies used: React, Material UI, REST APIs, WCAG, AWS, Jenkins."
   },
   {
     "title": "Project: use-history-ai (NPM Package)",
-    "content": "AI-powered clipboard history manager for React. Track clipboard, add tags/categories, and analyze with Google Gemini AI. Published on NPM with Chrome extension. NPM Package: https://www.npmjs.com/package/use-history-ai. GitHub: https://github.com/pwsd21/use-history-ai. Technologies: React, TypeScript, NPM Package, Gemini AI. Year: 2024. Features include keyboard shortcuts (Ctrl+Shift+V), smart search, categories & tags, export/import functionality, and Chrome extension for system-wide clipboard tracking."
+    "content": "Released a React hook for AI-powered clipboard management using Google Gemini for smart text insights. Track clipboard history, add tags/categories, and analyze with Gemini AI. NPM Package: https://www.npmjs.com/package/use-history-ai. GitHub: https://github.com/pawansachdeva21/use-history-ai. Technologies: TypeScript, React, Google Gemini AI. Year: 2025. Features include keyboard shortcuts (Ctrl+Shift+V), smart search, categories & tags, export/import functionality, and a Chrome extension for system-wide clipboard tracking."
+  },
+  {
+    "title": "Project: Personal Portfolio with AI Chatbot",
+    "content": "My personal portfolio website with an integrated Gemini AI chatbot (that's me!) for natural language interactions, enhancing user engagement. Live: https://personal-portfolio-pawan-kumar-sachdevas-projects.vercel.app/. GitHub: https://github.com/pawansachdeva21/Personal_Portfolio. Technologies: Next.js, Gemini AI, TypeScript, Tailwind CSS."
   },
   {
     "title": "Project: Figma Clone",
-    "content": "Crafted a Figma clone using NextJS, Tailwind CSS, and Typescript, powered by Liveblocks. Project link: https://figma-clone-git-main-pawan-kumar-sachdevas-projects.vercel.app/. Technologies: React, Next.js, shadcn, Tailwind CSS. Year: 2024."
+    "content": "Developed a real-time collaborative design tool with live canvas drawing and multi-user sync, built with Next.js, ShadCN, and Liveblocks. Project link: https://figma-clone-git-main-pawan-kumar-sachdevas-projects.vercel.app/. Year: 2024."
   },
   {
-    "title": "Project: Rapid Chat App",
-    "content": "Engineered a full-stack real-time Chat Application with MERN and Chakra UI, powered by Socket.IO. Project link: https://rapid-chat-q01f.onrender.com/. Technologies: Javascript, NodeJs, ReactJS, Chakra UI. Year: 2023."
+    "title": "Project: RapidChat",
+    "content": "Built a full-stack real-time chat app using MERN and Socket.IO with authentication and live messaging. Project link: https://rapid-chat-q01f.onrender.com/. Technologies: React, Node.js, Socket.IO, MongoDB. Year: 2023."
   },
   {
-    "title": "Service Offered: Frontend Development",
-    "content": "Building responsive and dynamic user interfaces using React, Next.js, and TypeScript. Focusing on performance, accessibility, and modern design principles."
+    "title": "Service Offered: AI Chatbots & Agents",
+    "content": "Building AI assistants and agentic workflows with LangChain, LangGraph, and MCP. Context-aware conversations, tool use, and observability with LangSmith."
+  },
+  {
+    "title": "Service Offered: RAG & LLM Integration",
+    "content": "Designing retrieval-augmented generation pipelines with Qdrant vector search and PostgreSQL, and integrating LLMs like Gemini into existing products."
   },
   {
     "title": "Service Offered: Full Stack Web Apps",
-    "content": "Developing end-to-end web applications with modern tech stack including Next.js, Node.js, and MongoDB. Ensuring scalable and maintainable solutions."
+    "content": "Developing end-to-end web applications with Next.js, React, and TypeScript on the front and FastAPI, Django, or Node.js on the back. Scalable and maintainable by design."
   },
   {
-    "title": "Service Offered: UI/UX Implementation",
-    "content": "Transforming design mockups into pixel-perfect, responsive interfaces using Tailwind CSS and modern CSS techniques. Ensuring smooth animations and transitions."
+    "title": "Service Offered: Frontend Development",
+    "content": "Building responsive, accessible interfaces with React, Next.js, Tailwind CSS, and ShadCN, including micro-frontend architectures for large platforms."
   },
   {
-    "title": "Service Offered: API Development",
-    "content": "Creating robust and efficient RESTful APIs using Node.js and Express. Implementing secure authentication, data validation, and proper error handling."
+    "title": "Service Offered: API & Backend Development",
+    "content": "Creating robust APIs and services with FastAPI, Django, and Node.js, backed by PostgreSQL and Redis, and deployed with Docker and Azure."
   },
   {
-    "title": "Service Offered: NPM Package Development",
-    "content": "Creating and publishing reusable React components and hooks as NPM packages. Specializing in developer tools, UI libraries, and utility packages with TypeScript support, comprehensive documentation, and CI/CD integration."
-  },
-  {
-    "title": "Skill Category: Languages",
-    "content": "My primary languages include JavaScript, TypeScript, Python, HTML5, and CSS3."
+    "title": "Skill Category: Programming Languages",
+    "content": "JavaScript, TypeScript, Python."
   },
   {
     "title": "Skill Category: Frontend Technologies",
-    "content": "I am proficient in React.js, Next.js, Tailwind CSS, RRV7 (Remix), Material UI, NextUI, Mantine, shadcn, Zustand, Redux Toolkit, and React Query."
+    "content": "React.js, Next.js, Tailwind CSS, ShadCN."
   },
   {
-    "title": "Skill Category: Backend and Databases",
-    "content": "My experience includes Node.js, Express.js, PostgreSQL, and MongoDB."
+    "title": "Skill Category: AI & LLM",
+    "content": "LangChain, LangGraph, LangSmith, RAG (retrieval-augmented generation), MCP (Model Context Protocol)."
   },
   {
-    "title": "Skill Category: Real-Time Communication",
-    "content": "I have experience with WebRTC, JsSIP, Asterisk, Socket.IO, and Jitsi."
+    "title": "Skill Category: Backend & Databases",
+    "content": "FastAPI, Django, PostgreSQL, MS SQL, Qdrant (vector database), Redis."
   },
   {
-    "title": "Skill Category: DevOps and Deployment",
-    "content": "I use Git, GitHub, Docker, Vercel, Netlify, and pm2 for version control, containerization, and deployment. I also have experience with CI/CD pipelines using GitHub Actions."
-  },
-  {
-    "title": "Skill Category: Package Development",
-    "content": "I have experience creating and publishing NPM packages, including React hooks and components. Proficient with Turborepo for monorepo management, tsup for bundling, and implementing comprehensive testing with Vitest."
-  },
-  {
-    "title": "NPM Packages Published",
-    "content": "use-history-ai - An AI-powered clipboard history manager for React applications. Published on NPM at https://www.npmjs.com/package/use-history-ai. Features include clipboard tracking, AI analysis with Google Gemini, keyboard shortcuts, tags and categories, export/import functionality, and a Chrome extension."
+    "title": "Skill Category: DevOps & Cloud",
+    "content": "Git, GitHub, Docker, Azure."
   }
 ]

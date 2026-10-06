@@ -1,49 +1,28 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import HeadingBadge from "@/app/components/heading-badge";
-import { IconBrandNextjs } from "@tabler/icons-react";
 import {
-  SiAsterisk,
-  SiExpress,
-  SiJest,
-  SiJitsi,
-  SiMantine,
-  SiMaterialdesign,
-  SiMongodb,
-  SiNetlify,
+  SiDjango,
+  SiDocker,
+  SiFastapi,
+  SiGit,
+  SiGithub,
+  SiJavascript,
+  SiLangchain,
   SiNextdotjs,
-  SiNodedotjs,
-  SiPm2,
-  SiPuppeteer,
+  SiPostgresql,
+  SiPython,
   SiReact,
-  SiReactquery,
-  SiRedux,
-  SiRtl,
-  SiSocketdotio,
+  SiRedis,
+  SiShadcnui,
+  SiTailwindcss,
   SiTypescript,
-  SiVercel,
-  SiVitest,
-  SiWebrtc,
 } from "react-icons/si";
-import { IoLogoJavascript } from "react-icons/io";
-import {
-  FaDocker,
-  FaGitAlt,
-  FaGithub,
-  FaPython,
-  FaReact,
-} from "react-icons/fa";
-import { RiTailwindCssFill, RiJavascriptFill } from "react-icons/ri";
-import { FiFigma } from "react-icons/fi";
-import { BiLogoPostgresql } from "react-icons/bi";
-import { useTheme } from "next-themes";
-import { Lightbulb } from "lucide-react";
-import { FaCss3Alt, FaHtml5 } from "react-icons/fa6";
+import { DiMsqlServer } from "react-icons/di";
+import { VscAzure } from "react-icons/vsc";
+import { Database, FileSearch, Lightbulb, Plug } from "lucide-react";
 
 type Skill = {
   name: string;
-  icon?: React.ReactNode | string;
+  icon?: React.ReactNode;
 };
 
 type SkillCategory = {
@@ -51,81 +30,61 @@ type SkillCategory = {
   skills: Skill[];
 };
 
-// Sample skills data
 const skillCategories: SkillCategory[] = [
   {
-    name: "Languages",
+    name: "Programming Languages",
     skills: [
-      { name: "JavaScript", icon: <IoLogoJavascript /> },
+      { name: "JavaScript", icon: <SiJavascript /> },
       { name: "TypeScript", icon: <SiTypescript /> },
-      { name: "Python", icon: <FaPython /> },
-      { name: "HTML5", icon: <FaHtml5 /> },
-      { name: "CSS3", icon: <FaCss3Alt /> },
+      { name: "Python", icon: <SiPython /> },
     ],
   },
   {
-    name: "Frontend",
+    name: "Frontend Technologies",
     skills: [
-      { name: "React.js", icon: <FaReact /> },
-      { name: "Next.js", icon: <IconBrandNextjs /> },
-      { name: "Tailwind CSS", icon: <RiTailwindCssFill /> },
-      { name: "RRV7(Remix)", icon: <FiFigma /> },
-      { name: "Material UI", icon: <SiMaterialdesign /> },
-      { name: "NextUI", icon: <SiNextdotjs /> },
-      { name: "Mantine", icon: <SiMantine /> },
-      { name: "shadcn", icon: <SiReact /> },
-      { name: "Zustand", icon: <SiReact /> },
-      { name: "Redux Toolkit", icon: <SiRedux /> },
-      { name: "React Query", icon: <SiReactquery /> },
+      { name: "React.js", icon: <SiReact /> },
+      { name: "Next.js", icon: <SiNextdotjs /> },
+      { name: "Tailwind CSS", icon: <SiTailwindcss /> },
+      { name: "ShadCN", icon: <SiShadcnui /> },
     ],
   },
   {
-    name: "Email & Marketing",
+    name: "AI & LLM",
     skills: [
-      { name: "HTML Email" },
-      { name: "Responsive Email" },
-      { name: "Eloqua" },
-      { name: "Marketo" },
-      { name: "Salesforce Marketing Cloud" },
-      { name: "FreeMarker" },
-      { name: "Knak" },
+      { name: "LangChain", icon: <SiLangchain /> },
+      { name: "LangGraph", icon: <SiLangchain /> },
+      { name: "LangSmith", icon: <SiLangchain /> },
+      { name: "RAG", icon: <FileSearch /> },
+      { name: "MCP", icon: <Plug /> },
     ],
   },
   {
     name: "Backend & Databases",
     skills: [
-      { name: "Node.js", icon: <SiNodedotjs /> },
-      { name: "Express.js", icon: <SiExpress /> },
-      { name: "PostgreSQL", icon: <BiLogoPostgresql /> },
-      { name: "MongoDB", icon: <SiMongodb /> },
+      { name: "FastAPI", icon: <SiFastapi /> },
+      { name: "Django", icon: <SiDjango /> },
+      { name: "PostgreSQL", icon: <SiPostgresql /> },
+      { name: "MS SQL", icon: <DiMsqlServer /> },
+      { name: "Qdrant", icon: <Database /> },
+      { name: "Redis", icon: <SiRedis /> },
     ],
   },
   {
-    name: "Real-Time Communication",
+    name: "DevOps & Cloud",
     skills: [
-      { name: "WebRTC", icon: <SiWebrtc /> },
-      { name: "JsSIP", icon: <RiJavascriptFill /> },
-      { name: "Asterisk", icon: <SiAsterisk /> },
-      // { name: "Ring Central", icon: <MdCall /> },
-      { name: "Socket.IO", icon: <SiSocketdotio /> },
-      { name: "Jitsi", icon: <SiJitsi /> },
+      { name: "Git", icon: <SiGit /> },
+      { name: "GitHub", icon: <SiGithub /> },
+      { name: "Docker", icon: <SiDocker /> },
+      { name: "Azure", icon: <VscAzure /> },
     ],
   },
-  {
-    name: "Testing & DevOps",
-    skills: [
-      { name: "Jest", icon: <SiJest /> },
-      { name: "React Testing Library", icon: <SiRtl /> },
-      { name: "Puppeteer", icon: <SiPuppeteer /> },
-      { name: "Vitest", icon: <SiVitest /> },
-      { name: "Git", icon: <FaGitAlt /> },
-      { name: "GitHub", icon: <FaGithub /> },
-      { name: "Docker", icon: <FaDocker /> },
-      { name: "Vercel", icon: <SiVercel /> },
-      { name: "Netlify", icon: <SiNetlify /> },
-      { name: "pm2", icon: <SiPm2 /> },
-    ],
-  },
+];
+
+const highlights = [
+  { value: "5+", label: "Years Experience" },
+  { value: "10+", label: "Projects" },
+  { value: "8+", label: "Clients" },
+  { value: "25+", label: "Technologies" },
 ];
 
 const SkillTag = ({ name, icon }: Skill) => {
@@ -144,16 +103,6 @@ const SkillTag = ({ name, icon }: Skill) => {
 };
 
 export function SkillsSection() {
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // For server-side rendering, use a default background that works for both themes
-  const defaultBackground = `radial-gradient(circle at center, rgba(128, 128, 128, 0.03) 0%, rgba(128, 128, 128, 0.06) 35%, transparent 70%)`;
-
   return (
     <section
       id="skills"
@@ -190,12 +139,7 @@ export function SkillsSection() {
 
       {/* Experience highlights */}
       <div className="w-full mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[
-          { value: "4+", label: "Years Experience" },
-          { value: "10+", label: "Projects" },
-          { value: "8+", label: "Clients" },
-          { value: "25+", label: "Technologies" },
-        ].map((highlight) => (
+        {highlights.map((highlight) => (
           <div
             key={highlight.label}
             className="group relative p-6 rounded-sm border border-gray-200/80 dark:border-gray-800/50 bg-white dark:bg-[#0a0a0a] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300 text-center overflow-hidden"
@@ -208,16 +152,7 @@ export function SkillsSection() {
                 {highlight.label}
               </div>
             </div>
-            <div
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-              style={{
-                background: mounted
-                  ? theme === "dark"
-                    ? `radial-gradient(circle at center, rgba(34, 197, 94, 0.03) 0%, rgba(34, 197, 94, 0.06) 35%, transparent 70%)`
-                    : `radial-gradient(circle at center, rgba(8, 9, 10, 0.03) 0%, rgba(8, 9, 10, 0.06) 35%, transparent 70%)`
-                  : defaultBackground,
-              }}
-            />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(8,9,10,0.03)_0%,rgba(8,9,10,0.06)_35%,transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(34,197,94,0.03)_0%,rgba(34,197,94,0.06)_35%,transparent_70%)]" />
             <div className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#08090a]/30 dark:via-emerald-500/30 to-transparent scale-x-0 group-hover:scale-x-100 opacity-0 group-hover:opacity-100 transition-all duration-500" />
           </div>
         ))}

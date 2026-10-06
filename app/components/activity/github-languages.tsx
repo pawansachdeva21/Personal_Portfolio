@@ -17,7 +17,7 @@ interface Repository {
   language: string | null;
 }
 
-export function GitHubLanguages({ username = "pwsd21" }: GitHubLanguagesProps) {
+export function GitHubLanguages({ username = "pawansachdeva21" }: GitHubLanguagesProps) {
   const [languages, setLanguages] = useState<Language[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

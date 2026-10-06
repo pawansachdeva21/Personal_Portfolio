@@ -61,7 +61,7 @@ export function ContactSection() {
 
               <div className="flex items-center justify-center gap-4 pt-4">
                 <a
-                  href="https://github.com/pwsd21"
+                  href="https://github.com/pawansachdeva21"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group p-3 rounded-sm bg-gray-100 dark:bg-[#191a1a] text-[#08090a] dark:text-emerald-500 hover:bg-gray-200 dark:hover:bg-emerald-500/10 transition-colors relative overflow-hidden"

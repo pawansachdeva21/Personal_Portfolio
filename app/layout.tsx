@@ -16,24 +16,29 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pawan Sachdeva",
-  description: "",
+  title: "Pawan Sachdeva | Senior Full Stack & AI Engineer",
+  description:
+    "Senior Full Stack & AI Engineer with 5+ years of experience in React, Next.js, Python, FastAPI, and GenAI: LangChain, LangGraph, RAG, and AI agents.",
   keywords: [
     "Pawan Sachdeva",
     "Pawan",
     "Sachdeva",
     "Portfolio",
-    "Software Developer",
     "Full Stack Developer",
-    "Frontend Developer",
-    "Backend Developer",
-    "Django Developer",
-    "Ai Agents",
+    "AI Engineer",
+    "GenAI",
+    "AI Agents",
     "LangChain",
+    "LangGraph",
+    "RAG",
+    "FastAPI",
+    "Next.js",
+    "React",
   ],
   openGraph: {
-    title: "Pawan Sachdeva",
-    description: "",
+    title: "Pawan Sachdeva | Senior Full Stack & AI Engineer",
+    description:
+      "Senior Full Stack & AI Engineer with 5+ years of experience in React, Next.js, Python, FastAPI, and GenAI: LangChain, LangGraph, RAG, and AI agents.",
     type: "website",
     url: "https://personal-portfolio-pawan-kumar-sachdevas-projects.vercel.app/",
   },
@@ -47,6 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider

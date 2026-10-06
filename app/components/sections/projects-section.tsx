@@ -20,34 +20,43 @@ const projects: Project[] = [
     id: "1",
     title: "use-history-ai",
     description:
-      "AI-powered clipboard history manager for React. Track clipboard, add tags/categories, and analyze with Google Gemini AI. Published on NPM.",
+      "Released a React hook for AI-powered clipboard management, using Google Gemini for smart text insights. Track history, add tags and categories, published on NPM.",
     imageUrl: "/projects/npmm.png",
-    videoUrl: "/projects/clipboard-ai.mp4", // Add demo video
-    tags: ["React", "TypeScript", "NPM Package", "Gemini AI"],
+    tags: ["TypeScript", "React", "Google Gemini AI", "NPM Package"],
     link: "https://www.npmjs.com/package/use-history-ai", // Your Vercel demo
     npmLink: "https://www.npmjs.com/package/use-history-ai",
-    githubLink: "https://github.com/pwsd21/use-history-ai",
+    githubLink: "https://github.com/pawansachdeva21/use-history-ai",
     year: "2025",
   },
   {
     id: "2",
+    title: "Personal Portfolio with AI Chatbot",
+    description:
+      "This site! Integrated a Gemini AI chatbot that answers questions about my work through natural language, streaming responses grounded in my profile.",
+    tags: ["Next.js", "Gemini AI", "TypeScript", "Tailwind CSS"],
+    link: "https://personal-portfolio-pawan-kumar-sachdevas-projects.vercel.app/",
+    githubLink: "https://github.com/pawansachdeva21/Personal_Portfolio",
+    year: "2025",
+  },
+  {
+    id: "3",
     title: "Figma Clone",
     description:
-      "Crafted Figma clone using NextJS, Tailwind CSS, and Typescript, powered by Liveblocks.",
+      "Developed a real-time collaborative design tool with live canvas drawing and multi-user sync, powered by Liveblocks.",
     imageUrl: "",
     videoUrl: "/projects/figma.mp4",
-    tags: ["React", "Next.js", "shadcn", "Tailwind CSS"],
+    tags: ["Next.js", "ShadCN", "Liveblocks", "Tailwind CSS"],
     link: "https://figma-clone-git-main-pawan-kumar-sachdevas-projects.vercel.app/",
     year: "2024",
   },
   {
-    id: "3",
-    title: "Rapid Chat App",
+    id: "4",
+    title: "RapidChat",
     description:
-      "Engineered a full-stack real-time Chat Application with MERN and Chakra UI, powered by Socket.IO.",
+      "Built a full-stack real-time chat app using MERN and Socket.IO with authentication and live messaging.",
     imageUrl: "",
     videoUrl: "/projects/chat.mp4",
-    tags: ["Javascript", "NodeJs", "ReactJS", "Chakra UI"],
+    tags: ["React", "Node.js", "Socket.IO", "MongoDB"],
     link: "https://rapid-chat-q01f.onrender.com/",
     year: "2023",
   },

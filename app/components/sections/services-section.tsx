@@ -1,9 +1,10 @@
 import HeadingBadge from "@/app/components/heading-badge";
 import { SpotlightCard } from "@/app/components/ui/spotlight-card";
 import {
+  BotIcon,
+  DatabaseZapIcon,
   MonitorIcon,
   CodeIcon,
-  LayoutIcon,
   ServerIcon,
   Wrench,
 } from "lucide-react";
@@ -16,31 +17,37 @@ type Service = {
 
 const services: Service[] = [
   {
-    title: "Frontend Development",
+    title: "AI Chatbots & Agents",
     description:
-      "Building responsive and dynamic user interfaces using React, Next.js, and TypeScript. Focusing on performance, accessibility, and modern design principles.",
+      "Building AI assistants and agentic workflows with LangChain, LangGraph, and MCP. Context-aware conversations, tool use, and observability with LangSmith.",
+    icon: <BotIcon className="w-6 h-6 text-gray-900 dark:text-emerald-500" />,
+  },
+  {
+    title: "RAG & LLM Integration",
+    description:
+      "Designing retrieval-augmented generation pipelines with Qdrant vector search and PostgreSQL, and integrating LLMs like Gemini into existing products.",
     icon: (
-      <MonitorIcon className="w-6 h-6 text-gray-900 dark:text-emerald-500" />
+      <DatabaseZapIcon className="w-6 h-6 text-gray-900 dark:text-emerald-500" />
     ),
   },
   {
     title: "Full Stack Web Apps",
     description:
-      "Developing end-to-end web applications with modern tech stack including Next.js, Node.js, and MongoDB. Ensuring scalable and maintainable solutions.",
+      "Developing end-to-end web applications with Next.js, React, and TypeScript on the front and FastAPI, Django, or Node.js on the back. Scalable and maintainable by design.",
     icon: <CodeIcon className="w-6 h-6 text-gray-900 dark:text-emerald-500" />,
   },
   {
-    title: "UI/UX Implementation",
+    title: "Frontend Development",
     description:
-      "Transforming design mockups into pixel-perfect, responsive interfaces using Tailwind CSS and modern CSS techniques. Ensuring smooth animations and transitions.",
+      "Building responsive, accessible interfaces with React, Next.js, Tailwind CSS, and ShadCN, including micro-frontend architectures for large platforms.",
     icon: (
-      <LayoutIcon className="w-6 h-6 text-gray-900 dark:text-emerald-500" />
+      <MonitorIcon className="w-6 h-6 text-gray-900 dark:text-emerald-500" />
     ),
   },
   {
-    title: "API Development",
+    title: "API & Backend Development",
     description:
-      "Creating robust and efficient RESTful APIs using Node.js and Express. Implementing secure authentication, data validation, and proper error handling.",
+      "Creating robust APIs and services with FastAPI, Django, and Node.js, backed by PostgreSQL and Redis, and deployed with Docker and Azure.",
     icon: (
       <ServerIcon className="w-6 h-6 text-gray-900 dark:text-emerald-500" />
     ),

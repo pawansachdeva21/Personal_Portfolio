@@ -15,19 +15,20 @@ export function IntroSection() {
           </h1>
 
           <p className="text-xl sm:text-2xl font-medium text-[#737373] dark:text-[#A1A1AA] max-w-2xl">
-            A Senior Software Engineer passionate about crafting seamless
-            digital experiences
+            A Senior Full Stack &amp; AI Engineer building intelligent,
+            scalable products
           </p>
 
           <p className="text-sm sm:text-base font-normal text-[#737373] dark:text-[#A1A1AA] max-w-2xl">
-            I specialize in building web apps with{" "}
+            With 5+ years of experience, I build full-stack apps and GenAI
+            systems with{" "}
             <span className="text-[#08090a] dark:text-emerald-500">
-              Next.js, React, TypeScript, Tailwind CSS, Node.js and
-              more.
+              React, Next.js, Python, FastAPI, LangChain, LangGraph and RAG.
             </span>{" "}
-            Always excited to tackle new challenges where I can create value and
-            grow as a coder. Let&apos;s connect if you&apos;ve got a project
-            that could use my skills!
+            From AI chatbots and agent workflows to platforms serving millions
+            of users, I love turning complex problems into products people
+            actually use. Let&apos;s connect if you&apos;ve got a project that
+            could use my skills!
           </p>
         </article>
       </div>

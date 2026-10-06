@@ -57,7 +57,7 @@ export function ActivitySection() {
             </h4>
           </div>
           <CombinedActivityTracker
-            githubUsername="pwsd21"
+            githubUsername="pawansachdeva21"
             // leetcodeUsername="pawansachdeva1998"
           />
         </div>
@@ -117,7 +117,7 @@ export function ActivitySection() {
                 </h4>
               </div>
               <a
-                href="https://github.com/pwsd21"
+                href="https://github.com/pawansachdeva21"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1 text-sm text-emerald-600 dark:text-emerald-400 hover:underline"
@@ -125,7 +125,7 @@ export function ActivitySection() {
                 View <ExternalLink size={14} />
               </a>
             </div>
-            <GitHubLanguages username="pwsd21" />
+            <GitHubLanguages username="pawansachdeva21" />
           </div>
         </SpotlightCard>
       </div>

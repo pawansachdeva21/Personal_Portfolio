@@ -26,7 +26,7 @@ interface CombinedActivityTrackerProps {
 }
 
 export function CombinedActivityTracker({
-  githubUsername = "pwsd21",
+  githubUsername = "pawansachdeva21",
 }: // leetcodeUsername = "pawansachdeva1998",
 CombinedActivityTrackerProps) {
   const initialYear = new Date().getFullYear() - 1;

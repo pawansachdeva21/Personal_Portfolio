@@ -6,13 +6,11 @@ import React, { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import MobileNav from "./mobile-nav";
+import { NAV_SECTIONS, NavSection, scrollToSection } from "@/app/lib/nav";
 
 interface NavbarProps {
   developerInitial?: string;
-  sections?: {
-    id: string;
-    label: string;
-  }[];
+  sections?: NavSection[];
 }
 
 type SectionPosition = {
@@ -22,17 +20,7 @@ type SectionPosition = {
   height: number;
 };
 
-export function Navbar({
-  sections = [
-    { id: "about", label: "About" },
-    { id: "skills", label: "Skills" },
-    { id: "projects", label: "Projects" },
-    { id: "experience", label: "Experience" },
-    { id: "certifications", label: "Certifications" },
-    { id: "services", label: "Services" },
-    { id: "contact", label: "Contact" },
-  ],
-}: NavbarProps) {
+export function Navbar({ sections = NAV_SECTIONS }: NavbarProps) {
   const { theme, setTheme } = useTheme();
   const [activeSection, setActiveSection] = useState("about");
   const [scrolled, setScrolled] = useState(false);
@@ -105,21 +93,8 @@ export function Navbar({
     });
   };
 
-  const scrollToSection = (id: string) => {
-    if (!mounted) return;
-    const element = document.getElementById(id);
-    if (!element) return;
-
-    const navbarHeight = 80; // Approximate navbar height including margins
-    const elementPosition =
-      element.getBoundingClientRect().top + window.scrollY;
-    const offsetPosition = elementPosition - navbarHeight;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth",
-    });
-
+  const handleNavClick = (id: string) => {
+    scrollToSection(id);
     setActiveSection(id);
   };
 
@@ -203,7 +178,7 @@ export function Navbar({
               )}
               onClick={(e) => {
                 e.preventDefault();
-                scrollToSection(section.id);
+                handleNavClick(section.id);
               }}
             >
               {activeSection === section.id && (

@@ -13,7 +13,7 @@ const WELCOME_MESSAGE: Message = {
   id: "welcome-01",
   role: "assistant",
   content:
-    "Hi, I'm Pawan's personal chatbot assistant. How can I help you today?",
+    "Hi, I'm Pawan's AI assistant. Ask me about his AI and full-stack experience, projects, or skills!",
 };
 
 export default function ChatBot() {

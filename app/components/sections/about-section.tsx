@@ -16,8 +16,8 @@ export function AboutSection() {
             <span className="text-[#08090a] dark:text-emerald-500">Story</span>
           </h3>
           <p className="text-[#737373] dark:text-[#A1A1AA] text-sm">
-            Learn about my journey, experience, and what drives me as a
-            developer.
+            Learn about my journey from web development to building AI-powered
+            products, and what drives me as an engineer.
           </p>
         </div>
       </div>
@@ -36,16 +36,19 @@ export function AboutSection() {
               Who I Am
             </h4>
             <p className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed">
-              I&apos;m a passionate full-stack developer with a keen eye for
-              design and a love for creating seamless user experiences. With
-              over 5 years of experience in web development, I&apos;ve worked on
-              a range of projects—from small business websites to complex
-              enterprise applications.
+              I&apos;m a full-stack and AI engineer with over 5 years of
+              experience building products end to end—from pixel-perfect React
+              and Next.js frontends to Python and FastAPI services and LLM-powered
+              workflows. Today I lead development of an AI-enabled CRM platform
+              serving 2M+ users across 5000+ schools.
             </p>
             <p className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed">
-              My approach blends technical expertise with creative
-              problem-solving, ensuring each project is not just functional, but
-              also visually engaging and user-friendly.
+              I build AI that does real work: conversational agents with
+              LangChain and LangGraph, RAG pipelines backed by Qdrant and
+              PostgreSQL, and AI-generated call summaries that cut manual
+              documentation by 90%. My approach blends solid engineering with
+              practical problem-solving, so every feature is reliable, scalable,
+              and genuinely useful.
             </p>
           </div>
 
@@ -55,16 +58,19 @@ export function AboutSection() {
               My Journey
             </h4>
             <p className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed">
-              My tech journey began in 2021 after graduating college, driven by
-              a growing interest in coding during my student years. Fascinated
-              by how things work behind the scenes, I chose to pursue software
-              development—starting with web development as my gateway.
+              My tech journey began in 2021 after earning my B.Tech from Guru
+              Nanak Dev Engineering College, Ludhiana. I started at Cognizant
+              building accessible pharma dashboards, then moved to Laminaar
+              Aviation, where I led a team of 4 building airline operational
+              modules with React and Node.js.
             </p>
             <p className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed">
-              Since then, I’ve built real-world projects, explored new
-              technologies, and collaborated with amazing teams. Each step has
-              sharpened my skills and deepened my passion for learning and
-              building impactful digital solutions.
+              At Hitachi MGRM Net, my work grew from real-time calling with
+              WebRTC and Asterisk into Generative AI—chatbots, agent workflows,
+              and RAG systems in production. Along the way I&apos;ve shipped AI
+              side projects too, like use-history-ai on NPM and the Gemini-powered
+              assistant on this site. Each step has deepened my passion for
+              building impactful, intelligent software.
             </p>
           </div>
 

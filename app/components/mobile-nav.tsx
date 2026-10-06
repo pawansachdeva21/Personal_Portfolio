@@ -5,28 +5,18 @@ import { cn } from "@/app/lib/utils";
 import { ChevronRight, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { NAV_SECTIONS, NavSection, scrollToSection } from "@/app/lib/nav";
 
 interface MobileNavProps {
   isOpen?: boolean;
   onClose?: () => void;
-  sections?: {
-    id: string;
-    label: string;
-  }[];
+  sections?: NavSection[];
 }
 
 const MobileNav = ({
   isOpen = false,
   onClose,
-  sections = [
-    { id: "about", label: "About" },
-    { id: "skills", label: "Skills" },
-    { id: "projects", label: "Projects" },
-    { id: "experience", label: "Experience" },
-    { id: "certifications", label: "Certifications" },
-    { id: "services", label: "Services" },
-    { id: "contact", label: "Contact" },
-  ],
+  sections = NAV_SECTIONS,
 }: MobileNavProps) => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -35,21 +25,8 @@ const MobileNav = ({
     setMounted(true);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    if (!mounted) return;
-    const element = document.getElementById(id);
-    if (!element) return;
-
-    const navbarHeight = 80;
-    const elementPosition =
-      element.getBoundingClientRect().top + window.scrollY;
-    const offsetPosition = elementPosition - navbarHeight;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth",
-    });
-
+  const handleNavClick = (id: string) => {
+    scrollToSection(id);
     onClose?.();
   };
 
@@ -94,7 +71,7 @@ const MobileNav = ({
                 )}
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollToSection(section.id);
+                  handleNavClick(section.id);
                 }}
                 style={{
                   transitionDelay: `${i * 75}ms`,
