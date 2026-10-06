@@ -1,17 +1,9 @@
-"use client";
-
 import HeadingBadge from "@/app/components/heading-badge";
 import { SpotlightCard } from "@/app/components/ui/spotlight-card";
-import {
-  Activity,
-  TrendingUp,
-  ExternalLink,
-  Github,
-  // Code2,
-} from "lucide-react";
+import { Activity, TrendingUp, ExternalLink, Github } from "lucide-react";
 import { CombinedActivityTracker } from "../activity/combined-activity-tracker";
 import { GitHubLanguages } from "../activity/github-languages";
-// import { LeetCodeStats } from "../activity/leetcode-stats";
+import { GITHUB_URL } from "@/app/lib/constants";
 
 export function ActivitySection() {
   return (
@@ -38,7 +30,6 @@ export function ActivitySection() {
         </div>
       </div>
 
-      {/* Combined Activity Tracker */}
       <SpotlightCard
         gradientColor="rgba(34, 197, 94, 0.1)"
         lightGradientColor="rgba(8, 9, 10, 0.1)"
@@ -56,79 +47,40 @@ export function ActivitySection() {
               Activity Tracker
             </h4>
           </div>
-          <CombinedActivityTracker
-            githubUsername="pawansachdeva21"
-            // leetcodeUsername="pawansachdeva1998"
-          />
+          <CombinedActivityTracker />
         </div>
       </SpotlightCard>
 
-      {/* Two Column Layout for LeetCode Stats and Languages */}
-      <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 w-full">
-        {/* LeetCode Stats */}
-        {/* <SpotlightCard
-          gradientColor="rgba(34, 197, 94, 0.1)"
-          lightGradientColor="rgba(8, 9, 10, 0.1)"
-          spotlightSize={400}
-          disableScale={true}
-          className="p-6 rounded-sm border border-gray-200/80 dark:border-gray-800/50 bg-white dark:bg-[#0a0a0a] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300"
-        >
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Code2
-                  size={20}
-                  className="text-gray-900 dark:text-emerald-500"
-                />
-                <h4 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  LeetCode Stats
-                </h4>
-              </div>
-              <a
-                href="https://leetcode.com/pawansachdeva1998"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 text-sm text-emerald-600 dark:text-emerald-400 hover:underline"
-              >
-                View <ExternalLink size={14} />
-              </a>
+      <SpotlightCard
+        gradientColor="rgba(34, 197, 94, 0.1)"
+        lightGradientColor="rgba(8, 9, 10, 0.1)"
+        spotlightSize={400}
+        disableScale={true}
+        className="p-6 rounded-sm border border-gray-200/80 dark:border-gray-800/50 bg-white dark:bg-[#0a0a0a] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300"
+      >
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Github
+                size={20}
+                className="text-gray-900 dark:text-emerald-500"
+              />
+              <h4 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Language Stats
+              </h4>
             </div>
-            <LeetCodeStats username="pawansachdeva1998" />
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-sm text-emerald-600 dark:text-emerald-400 hover:underline"
+            >
+              View <ExternalLink size={14} />
+            </a>
           </div>
-        </SpotlightCard> */}
-
-        {/* GitHub Languages */}
-        <SpotlightCard
-          gradientColor="rgba(34, 197, 94, 0.1)"
-          lightGradientColor="rgba(8, 9, 10, 0.1)"
-          spotlightSize={400}
-          disableScale={true}
-          className="p-6 rounded-sm border border-gray-200/80 dark:border-gray-800/50 bg-white dark:bg-[#0a0a0a] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300"
-        >
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Github
-                  size={20}
-                  className="text-gray-900 dark:text-emerald-500"
-                />
-                <h4 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Language Stats
-                </h4>
-              </div>
-              <a
-                href="https://github.com/pawansachdeva21"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 text-sm text-emerald-600 dark:text-emerald-400 hover:underline"
-              >
-                View <ExternalLink size={14} />
-              </a>
-            </div>
-            <GitHubLanguages username="pawansachdeva21" />
-          </div>
-        </SpotlightCard>
-      </div>
+          <GitHubLanguages />
+        </div>
+      </SpotlightCard>
     </section>
   );
 }
