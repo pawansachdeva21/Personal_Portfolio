@@ -8,10 +8,12 @@ import {
   SiJavascript,
   SiLangchain,
   SiNextdotjs,
+  SiNodedotjs,
   SiPostgresql,
   SiPython,
   SiReact,
   SiRedis,
+  SiRtl,
   SiShadcnui,
   SiTailwindcss,
   SiTypescript,
@@ -46,6 +48,7 @@ const skillCategories: SkillCategory[] = [
       { name: "Next.js", icon: <SiNextdotjs /> },
       { name: "Tailwind CSS", icon: <SiTailwindcss /> },
       { name: "ShadCN", icon: <SiShadcnui /> },
+      { name: "React Testing Library", icon: <SiRtl /> },
     ],
   },
   {
@@ -63,6 +66,7 @@ const skillCategories: SkillCategory[] = [
     skills: [
       { name: "FastAPI", icon: <SiFastapi /> },
       { name: "Django", icon: <SiDjango /> },
+      { name: "Node.JS", icon: <SiNodedotjs /> },
       { name: "PostgreSQL", icon: <SiPostgresql /> },
       { name: "MS SQL", icon: <DiMsqlServer /> },
       { name: "Qdrant", icon: <Database /> },
