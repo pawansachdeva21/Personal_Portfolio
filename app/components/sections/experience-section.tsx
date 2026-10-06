@@ -88,7 +88,7 @@ const experiences: Experience[] = [
 ];
 
 export function ExperienceSection() {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
 
   const toggleExpand = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index);

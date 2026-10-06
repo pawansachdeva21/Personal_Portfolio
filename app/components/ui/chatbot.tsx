@@ -18,10 +18,10 @@ const WELCOME_MESSAGE: Message = {
 
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([WELCOME_MESSAGE]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [initialLoad, setInitialLoad] = useState(true);
+  const [showNudge, setShowNudge] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -32,19 +32,16 @@ export default function ChatBot() {
     scrollToBottom();
   }, [messages]);
 
+  // Gently point visitors at the assistant instead of popping it open
   useEffect(() => {
-    if (initialLoad) {
-      const timer = setTimeout(() => {
-        setIsOpen(true);
-        setMessages([WELCOME_MESSAGE]);
-        setInitialLoad(false);
-        const audio = new Audio("/sounds/notification.mp3");
-        audio.play().catch((err) => console.log("Audio play error:", err));
-      }, 3000);
+    const timer = setTimeout(() => setShowNudge(true), 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
-      return () => clearTimeout(timer);
-    }
-  }, [initialLoad]);
+  const toggleChat = () => {
+    setIsOpen((open) => !open);
+    setShowNudge(false);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -121,9 +118,25 @@ export default function ChatBot() {
 
   return (
     <>
+      {/* Nudge bubble */}
+      {showNudge && !isOpen && (
+        <div className="fixed bottom-8 right-24 z-50 hidden sm:flex items-center gap-2 rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-[#111] pl-4 pr-2 py-2 text-sm text-[#08090a] dark:text-gray-200 shadow-lg animate-appear">
+          <button onClick={toggleChat} className="text-left">
+            Ask my AI assistant about me 👋
+          </button>
+          <button
+            onClick={() => setShowNudge(false)}
+            className="rounded-full p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+            aria-label="Dismiss"
+          >
+            <X size={14} />
+          </button>
+        </div>
+      )}
+
       {/* Toggle Button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleChat}
         className="fixed bottom-6 right-6 z-50 bg-emerald-500 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
         aria-label="Toggle chat"
       >

@@ -2,7 +2,7 @@ import { DownloadCloud, Mail, PhoneCallIcon } from "lucide-react";
 import { SectionHeader } from "@/app/components/section-header";
 import { SpotlightCard } from "@/app/components/ui/spotlight-card";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
-import { GITHUB_URL } from "@/app/lib/constants";
+import { GITHUB_URL, LINKEDIN_URL, RESUME_URL } from "@/app/lib/constants";
 
 export function ContactSection() {
   return (
@@ -68,7 +68,7 @@ export function ContactSection() {
                 </a>
 
                 <a
-                  href="https://www.linkedin.com/in/pawan-sachdeva-2a231017b/"
+                  href={LINKEDIN_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group p-3 rounded-sm bg-gray-100 dark:bg-[#191a1a] text-[#08090a] dark:text-emerald-500 hover:bg-gray-200 dark:hover:bg-emerald-500/10 transition-colors relative overflow-hidden"
@@ -78,7 +78,7 @@ export function ContactSection() {
                 </a>
 
                 <a
-                  href="https://drive.google.com/file/d/1mkvemYBaZdywAaqNek1TTm9S7qvjWOyx/view?usp=sharing"
+                  href={RESUME_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group p-3 rounded-sm bg-gray-100 dark:bg-[#191a1a] text-[#08090a] dark:text-emerald-500 hover:bg-gray-200 dark:hover:bg-emerald-500/10 transition-colors relative overflow-hidden"

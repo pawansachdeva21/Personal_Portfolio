@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { SectionHeader } from "@/app/components/section-header";
 import { SpotlightCard } from "@/app/components/ui/spotlight-card";
 
@@ -42,32 +43,53 @@ export function AboutSection() {
         description={<>A bit about me outside the resume.</>}
       />
 
-      <SpotlightCard
-        gradientColor="rgba(34, 197, 94, 0.1)"
-        lightGradientColor="rgba(8, 9, 10, 0.1)"
-        spotlightSize={400}
-        disableScale={true}
-        className="p-6 rounded-2xl border border-gray-200 dark:border-white/[0.08] bg-white/70 dark:bg-white/[0.02] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300 w-full"
-      >
-        <div className="grid gap-8 lg:grid-cols-3">
-          {story.map(({ title, paragraphs }) => (
-            <div key={title} className="space-y-4">
-              <h4 className="text-lg font-medium text-[#08090a] dark:text-white flex items-center gap-2">
-                <span className="h-1 w-1 rounded-full bg-gray-900 dark:bg-emerald-500"></span>
-                {title}
-              </h4>
-              {paragraphs.map((text) => (
-                <p
-                  key={text}
-                  className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed"
-                >
-                  {text}
-                </p>
-              ))}
-            </div>
-          ))}
-        </div>
-      </SpotlightCard>
+      <div className="grid w-full gap-6 lg:grid-cols-[300px_1fr] lg:items-stretch">
+        <figure className="relative mx-auto w-full max-w-md lg:max-w-none lg:h-full">
+          <div className="absolute -inset-3 rounded-3xl bg-emerald-500/10 blur-2xl" />
+          <div className="relative h-[400px] lg:h-full lg:min-h-[375px] overflow-hidden rounded-2xl border border-gray-200 dark:border-white/[0.08]">
+            <Image
+              src="/images/profile.jpg"
+              alt="Pawan Sachdeva"
+              fill
+              sizes="(min-width: 1024px) 300px, 448px"
+              className="object-cover object-top"
+            />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 pt-12">
+              <p className="text-base font-semibold text-white">
+                Pawan Sachdeva
+              </p>
+              <p className="text-xs text-gray-300">Gurugram, India</p>
+            </figcaption>
+          </div>
+        </figure>
+
+        <SpotlightCard
+          gradientColor="rgba(34, 197, 94, 0.1)"
+          lightGradientColor="rgba(8, 9, 10, 0.1)"
+          spotlightSize={400}
+          disableScale={true}
+          className="p-6 rounded-2xl border border-gray-200 dark:border-white/[0.08] bg-white/70 dark:bg-white/[0.02] hover:border-gray-900/30 dark:hover:border-emerald-500/30 transition-all duration-300 w-full"
+        >
+          <div className="divide-y divide-gray-200 dark:divide-white/[0.06]">
+            {story.map(({ title, paragraphs }) => (
+              <div key={title} className="space-y-2 py-4 first:pt-0 last:pb-0">
+                <h4 className="text-base font-medium text-[#08090a] dark:text-white flex items-center gap-2">
+                  <span className="h-1 w-1 rounded-full bg-gray-900 dark:bg-emerald-500"></span>
+                  {title}
+                </h4>
+                {paragraphs.map((text) => (
+                  <p
+                    key={text}
+                    className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed"
+                  >
+                    {text}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </div>
+        </SpotlightCard>
+      </div>
     </section>
   );
 }

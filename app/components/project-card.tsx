@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarRangeIcon } from "lucide-react";
+import { FaGithub } from "react-icons/fa6";
 import { SpotlightCard } from "@/app/components/ui/spotlight-card";
 import { LazyVideo } from "@/app/components/ui/lazy-video";
 
@@ -35,14 +36,18 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {(project.imageUrl || project.videoUrl) && (
           <div className="relative hidden md:block md:w-60 overflow-hidden border border-black">
             {project.imageUrl && (
-              <Image
-                src={project.imageUrl}
-                alt={project.title}
-                fill
-                sizes="240px"
-                className="object-cover p-1 rounded-sm"
-              />
-            )}
+            <div className="absolute top-5 left-5 w-48 h-40 p-1">
+              <div className="relative size-full overflow-hidden rounded-sm">
+                <Image
+                  src={project.imageUrl}
+                  alt={project.title}
+                  fill
+                  sizes="192px"
+                  className="object-cover object-top"
+                />
+              </div>
+            </div>
+          )}
             {project.videoUrl && (
               <LazyVideo
                 src={project.videoUrl}
@@ -72,7 +77,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             ))}
           </div>
 
-          <div className="pt-2 flex justify-between items-center">
+          <div className="mt-auto pt-2 flex justify-between items-center">
             <div className="flex items-center gap-2 text-xs font-medium">
               <div className="flex items-center gap-1 px-2 py-1 rounded-sm bg-white dark:bg-[#0a0a0a] border border-gray-200/80 dark:border-gray-800/50 text-[#737373] dark:text-[#A1A1AA] group-hover:border-gray-900/30 dark:group-hover:border-emerald-500/30 transition-all duration-300">
                 <CalendarRangeIcon className="size-3" />
@@ -80,16 +85,28 @@ export function ProjectCard({ project }: ProjectCardProps) {
               </div>
             </div>
 
-            {project.link && (
-              <Link
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative px-3 py-1.5 text-sm font-medium text-[#08090a] dark:text-emerald-500 group-hover:text-[#08090a]/90 dark:group-hover:text-emerald-500/90 transition-all duration-300 after:absolute after:bottom-0 after:left-3 after:h-[1px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-[80%]"
-              >
-                View Project →
-              </Link>
-            )}
+            <div className="flex items-center gap-1">
+              {project.githubLink && (
+                <Link
+                  href={project.githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-[#737373] dark:text-[#A1A1AA] hover:text-[#08090a] dark:hover:text-white transition-colors"
+                >
+                  <FaGithub className="size-4" /> Code
+                </Link>
+              )}
+              {project.link && (
+                <Link
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative whitespace-nowrap px-3 py-1.5 text-sm font-medium text-[#08090a] dark:text-emerald-500 group-hover:text-[#08090a]/90 dark:group-hover:text-emerald-500/90 transition-all duration-300 after:absolute after:bottom-0 after:left-3 after:h-[1px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-[80%]"
+                >
+                  View Project →
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </div>

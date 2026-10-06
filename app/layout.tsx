@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/app/components/theme-provider";
 import { Analytics } from "@vercel/analytics/next";
 import ChatBot from "./components/ui/chatbot";
+import { SITE_URL } from "@/app/lib/constants";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,6 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Pawan Sachdeva | Senior Full Stack & AI Engineer",
   description:
     "Senior Full Stack & AI Engineer with 5+ years of experience in React, Next.js, Python, FastAPI, and GenAI: LangChain, LangGraph, RAG, and AI agents.",
@@ -41,6 +43,9 @@ export const metadata: Metadata = {
       "Senior Full Stack & AI Engineer with 5+ years of experience in React, Next.js, Python, FastAPI, and GenAI: LangChain, LangGraph, RAG, and AI agents.",
     type: "website",
     url: "https://personal-portfolio-pawan-kumar-sachdevas-projects.vercel.app/",
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 
