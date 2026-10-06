@@ -5,11 +5,11 @@
   },
   {
     "title": "Detailed About Me - Who I Am",
-    "content": "I'm a full-stack and AI engineer with over 5 years of experience building products end to end, from React and Next.js frontends to Python and FastAPI services and LLM-powered workflows. Today I lead development of an AI-enabled CRM platform serving 2M+ users across 5000+ schools. I build AI that does real work: conversational agents with LangChain and LangGraph, RAG pipelines backed by Qdrant and PostgreSQL, and AI-generated call summaries that cut manual documentation by 90%."
+    "content": "I'm a developer who enjoys the whole journey of a product, from the first rough idea to the moment real people start using it. I'm just as happy polishing a small UI interaction as I am designing the backend and AI pieces that sit behind it. I care about simple, well-structured code and features that solve a real problem instead of just looking impressive in a demo. To me, good software should feel effortless to the people using it, even when there's a lot of complexity underneath."
   },
   {
     "title": "My Development Journey",
-    "content": "My tech journey began in 2021 after earning my B.Tech from Guru Nanak Dev Engineering College, Ludhiana (IKGPTU, 2017 - 2021). I started at Cognizant building accessible pharma dashboards, then moved to Laminaar Aviation Infotech, where I led a team of 4 building airline operational modules with React and Node.js. At Hitachi MGRM Net, my work grew from real-time calling with WebRTC and Asterisk into Generative AI: chatbots, agent workflows, and RAG systems in production. I've also shipped AI side projects like use-history-ai on NPM and the Gemini-powered assistant on my portfolio."
+    "content": "I got hooked on coding during college, mostly out of curiosity about how the apps I used every day actually worked. That curiosity turned into a career in 2021, and web development was my way in. React quickly became my favourite playground. Over time I went from building screens to owning features end to end. When Generative AI took off, I didn't want to just watch from the sidelines, so I dived in and learned by building: chatbots, agents, and side projects like this very assistant. Today, blending solid engineering with AI is what excites me most, and I'm still learning something new every week."
   },
   {
     "title": "Education",
@@ -17,7 +17,7 @@
   },
   {
     "title": "Life Beyond Coding (Hobbies and Fitness)",
-    "content": "Outside of tech, I enjoy playing cricket, following football, hitting the gym and playing chess, all of which fuel my creativity and keep me inspired. I'm also passionate about fitness and love hitting the gym regularly to stay energized and focused in both work and life."
+    "content": "Outside of tech, I enjoy playing and watching cricket, following football, and playing chess, all of which keep me sharp and inspired. I'm also big on fitness and hit the gym regularly to stay energized and focused in both work and life."
   },
   {
     "title": "Contact Information and Social Links",

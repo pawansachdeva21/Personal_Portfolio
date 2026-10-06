@@ -16,8 +16,8 @@ export function AboutSection() {
             <span className="text-[#08090a] dark:text-emerald-500">Story</span>
           </h3>
           <p className="text-[#737373] dark:text-[#A1A1AA] text-sm">
-            Learn about my journey from web development to building AI-powered
-            products, and what drives me as an engineer.
+            A little about who I am, how I got here, and what keeps me excited
+            about building software.
           </p>
         </div>
       </div>
@@ -36,19 +36,16 @@ export function AboutSection() {
               Who I Am
             </h4>
             <p className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed">
-              I&apos;m a full-stack and AI engineer with over 5 years of
-              experience building products end to end—from pixel-perfect React
-              and Next.js frontends to Python and FastAPI services and LLM-powered
-              workflows. Today I lead development of an AI-enabled CRM platform
-              serving 2M+ users across 5000+ schools.
+              I&apos;m a developer who enjoys the whole journey of a
+              product—from the first rough idea to the moment real people start
+              using it. I&apos;m just as happy polishing a small UI interaction
+              as I am designing the backend and AI pieces that sit behind it.
             </p>
             <p className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed">
-              I build AI that does real work: conversational agents with
-              LangChain and LangGraph, RAG pipelines backed by Qdrant and
-              PostgreSQL, and AI-generated call summaries that cut manual
-              documentation by 90%. My approach blends solid engineering with
-              practical problem-solving, so every feature is reliable, scalable,
-              and genuinely useful.
+              I care about simple, well-structured code and features that solve
+              a real problem instead of just looking impressive in a demo. To
+              me, good software should feel effortless to the people using it,
+              even when there&apos;s a lot of complexity underneath.
             </p>
           </div>
 
@@ -58,19 +55,18 @@ export function AboutSection() {
               My Journey
             </h4>
             <p className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed">
-              My tech journey began in 2021 after earning my B.Tech from Guru
-              Nanak Dev Engineering College, Ludhiana. I started at Cognizant
-              building accessible pharma dashboards, then moved to Laminaar
-              Aviation, where I led a team of 4 building airline operational
-              modules with React and Node.js.
+              I got hooked on coding during college, mostly out of curiosity
+              about how the apps I used every day actually worked. That
+              curiosity turned into a career in 2021, and web development was my
+              way in—React quickly became my favourite playground.
             </p>
             <p className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed">
-              At Hitachi MGRM Net, my work grew from real-time calling with
-              WebRTC and Asterisk into Generative AI—chatbots, agent workflows,
-              and RAG systems in production. Along the way I&apos;ve shipped AI
-              side projects too, like use-history-ai on NPM and the Gemini-powered
-              assistant on this site. Each step has deepened my passion for
-              building impactful, intelligent software.
+              Over time I went from building screens to owning features end to
+              end. When Generative AI took off, I didn&apos;t want to just watch
+              from the sidelines, so I dived in and learned by building—
+              chatbots, agents, and side projects like the assistant on this very
+              site. Today, blending solid engineering with AI is what excites me
+              most, and I&apos;m still learning something new every week.
             </p>
           </div>
 
@@ -81,10 +77,9 @@ export function AboutSection() {
             </h4>
             <p className="text-sm text-[#737373] dark:text-[#A1A1AA] leading-relaxed">
               Outside of tech, I enjoy playing and watching cricket, following
-              football, hitting the gym, and playing chess—all of which fuel my
-              creativity and keep me inspired. I’m also passionate about fitness
-              and love hitting the gym regularly to stay energized and focused
-              in both work and life.
+              football, and playing chess—all of which keep me sharp and
+              inspired. I&apos;m also big on fitness and hit the gym regularly
+              to stay energized and focused in both work and life.
             </p>
           </div>
         </div>
